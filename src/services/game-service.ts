@@ -14,4 +14,4 @@ export interface PlatformData {
   platform: { id: number; name: string };
 }
 
-export default create("/games/");
+export default create("/games");

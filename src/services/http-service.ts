@@ -7,8 +7,7 @@ interface Entity {
 class HttpService {
   endpoint: string;
   constructor(endpoint: string) {
-    this.endpoint =
-      endpoint[endpoint.length - 1] === "/" ? endpoint : endpoint + "/";
+    this.endpoint = endpoint;
   }
 
   async getAll<T>() {
@@ -25,7 +24,7 @@ class HttpService {
   }
 
   async getByID<T extends Entity>(entity: T) {
-    const resp = await apiClient.get<T>(this.endpoint + entity.id);
+    const resp = await apiClient.get<T>(this.endpoint +'/'+ entity.id);
     return resp;
   }
 }

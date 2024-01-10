@@ -7,7 +7,7 @@ interface Props {
 const NavBar = ({className=""}:Props) => {
   return <div className={className}>
     <HStack>
-        <Image src={logo}  borderRadius={"2xl"} boxSize={'60px'}></Image>
+        <Image src={logo}  borderRadius={"30px"} boxSize={'60px'}></Image>
     </HStack>
   </div>;
 };

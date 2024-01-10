@@ -1,5 +1,4 @@
 import { Grid, GridItem, Show, useColorModeValue } from "@chakra-ui/react";
-import ToggleModeButton from "./components/ToggleModeButton";
 import NavBar from "./components/NavBar";
 
 function App() {
@@ -9,7 +8,7 @@ function App() {
   const menuColor = useColorModeValue('blue','green');
   return (
     <>
-      <ToggleModeButton />
+      
       <Grid
         templateAreas={{
           base: `"nav nav" "menu menu"`,
@@ -17,7 +16,7 @@ function App() {
         }}
       >
         <GridItem area={"nav"} bg={navColor}>
-          <NavBar></NavBar>
+          <NavBar /> 
         </GridItem>
         <Show above="md">
           <GridItem area={"aside"} bg={asideColor}>

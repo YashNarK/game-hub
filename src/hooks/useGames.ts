@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import gameService, { GameData } from "./../services/game-service";
+import gameService, { GameData, GameDataResponse } from "./../services/game-service";
 import { AxiosError, CanceledError } from "../services/api-client";
 
 const useGames = () => {
@@ -13,9 +13,9 @@ const useGames = () => {
     async function fetchGames(): Promise<void> {
       try {
         setIsLoading(true);
-        const { resp, cancel } = await gameService.getAll<GameData>();
+        const { resp, cancel } = await gameService.get<GameDataResponse>();
         controllerAbort = cancel;
-        setGames(resp.data);
+        setGames(resp.data.results);
         setHttpErrors("");
       } catch (error) {
         if (error instanceof CanceledError) return;

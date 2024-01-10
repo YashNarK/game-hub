@@ -10,6 +10,19 @@ class HttpService {
     this.endpoint = endpoint;
   }
 
+  async get<T>(){
+    const controller = new AbortController();
+    const resp = await apiClient.get<T>(this.endpoint, {
+      signal: controller.signal,
+    });
+    return {
+      resp,
+      cancel: () => {
+        controller.abort();
+      },
+    };
+  }
+
   async getAll<T>() {
     const controller = new AbortController();
     const resp = await apiClient.get<T[]>(this.endpoint, {

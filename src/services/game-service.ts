@@ -1,5 +1,10 @@
 import create from "./http-service";
 
+export interface GameDataResponse {
+  count: number;
+  results: GameData[];
+}
+
 export interface GameData {
   id: number;
   name: string;

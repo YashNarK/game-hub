@@ -1,6 +1,8 @@
 import { Grid, GridItem, Show, useColorModeValue } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 
+
+
 function App() {
 
   const navColor = useColorModeValue('','');

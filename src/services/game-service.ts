@@ -16,7 +16,7 @@ export interface GameData {
 }
 
 export interface PlatformData {
-  platform: { id: number; name: string };
+  platform: { id: number; name: string[] };
 }
 
 export default create("/games");

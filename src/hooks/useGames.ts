@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import gameService, { GameData, GameDataResponse } from "./../services/game-service";
+import gameService, {
+  GameData,
+  GameDataResponse,
+} from "./../services/game-service";
 import { AxiosError, CanceledError } from "../services/api-client";
 
 const useGames = () => {
@@ -13,6 +16,9 @@ const useGames = () => {
     async function fetchGames(): Promise<void> {
       try {
         setIsLoading(true);
+        const delay = (delayInMilliseconds: number) =>
+          new Promise((resolve) => setTimeout(resolve, delayInMilliseconds));
+        await delay(1000);
         const { resp, cancel } = await gameService.get<GameDataResponse>();
         controllerAbort = cancel;
         setGames(resp.data.results);

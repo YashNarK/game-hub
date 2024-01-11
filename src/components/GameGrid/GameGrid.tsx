@@ -2,45 +2,54 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
-  Card,
-  CardBody,
+  Center,
   Grid,
   GridItem,
   Heading,
-  Image,
-  Stack,
+  Spinner,
+  Text,
 } from "@chakra-ui/react";
 import useGames from "../../hooks/useGames";
-import StarRatings from "../StarRatings";
 import GameCard from "../GameCard";
 
 const GameGrid = () => {
-  const { games, isLoading, httpErrors, setGames, setHttpErrors } = useGames();
+  const { games, isLoading, httpErrors } = useGames();
   // .platforms.map(x=>x.platform.name)
   console.log(games[0]);
   return (
     <>
       {httpErrors && (
-        <Alert status="error" variant={"solid"}  mb={3}>
+        <Alert status="error" variant={"solid"} mb={3}>
           <AlertIcon />
           <AlertDescription>{httpErrors}</AlertDescription>
         </Alert>
       )}
       {!httpErrors &&
-        <Grid
-        templateColumns={{
-          base: "repeat(1, 1fr)",
-          lg: "repeat(3, 1fr)",
-        }}
-        gap={4}
-      >
-        {games.map((game, index) => (
-          <GridItem key={index}>
-            <GameCard imageUrl={game.background_image} altText="Game Background image" heading={game.name} ratings={game.rating} />
-          </GridItem>
+        (isLoading ? (
+          <Center h={'100px'} color={'white'} >
+            <Spinner size={"xl"} />
+            <Heading>Loading Games List...</Heading>
+          </Center>
+        ) : (
+          <Grid
+            templateColumns={{
+              base: "repeat(1, 1fr)",
+              lg: "repeat(3, 1fr)",
+            }}
+            gap={4}
+          >
+            {games.map((game, index) => (
+              <GridItem key={index}>
+                <GameCard
+                  imageUrl={game.background_image}
+                  altText="Game Background image"
+                  heading={game.name}
+                  ratings={game.rating}
+                />
+              </GridItem>
+            ))}
+          </Grid>
         ))}
-      </Grid>
-      }
     </>
   );
 };

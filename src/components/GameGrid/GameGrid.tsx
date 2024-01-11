@@ -3,15 +3,17 @@ import {
   AlertDescription,
   AlertIcon,
   Center,
-  Grid,
   GridItem,
   Heading,
+  SimpleGrid,
   Spinner,
 } from "@chakra-ui/react";
 import useGames from "../../hooks/useGames";
 import GameCard from "../GameCard";
+import useColorModes from "../../hooks/useColorModes";
 
 const GameGrid = () => {
+  const {colorMode} = useColorModes()
   const { games, isLoading, httpErrors } = useGames();
   // .platforms.map(x=>x.platform.name)
   console.log(games[0]);
@@ -26,21 +28,22 @@ const GameGrid = () => {
       {!httpErrors &&
         (isLoading ? (
           <Center h={'100px'} color={'white'} >
-            <Spinner size={"xl"} />
-            <Heading>Loading Games List...</Heading>
+            <Spinner color={colorMode} size={"xl"} mx='3'/>
+            <Heading color={colorMode}>Loading Games List...</Heading>
           </Center>
         ) : (
-          <Grid
-            templateColumns={{
-              base: "repeat(1, 1fr)",
-              md: "repeat(2, 1fr)",
-              lg: "repeat(3, 1fr)",
-              xl: "repeat(4, 1fr)",
+          <SimpleGrid
+            columns={{
+              base: 1,
+              md: 2,
+              lg: 3,
+              xl: 4,
             }}
-            gap={4}
+            spacing={4}
+            
           >
             {games.map((game, index) => (
-              <GridItem key={index}>
+              <GridItem key={index} m={'auto'}>
                 <GameCard
                   imageUrl={game.background_image}
                   altText="Game Background image"
@@ -50,7 +53,7 @@ const GameGrid = () => {
                 />
               </GridItem>
             ))}
-          </Grid>
+          </SimpleGrid>
         ))}
     </>
   );

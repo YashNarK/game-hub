@@ -6,24 +6,26 @@ interface Props {
   altText: string;
   heading: string;
   ratings: number;
-  url: string;
+  gameUrl: string;
 }
 
-const GameCard = ({ imageUrl, altText, heading, ratings, url }: Props) => {
+const GameCard = ({ imageUrl, altText, heading, ratings, gameUrl }: Props) => {
   return (
     <>
       <Card
         as={"a"}
-        href={url}
+        href={gameUrl}
         target="_blank"
         w={{
-          base:"sm" ,
-          md: "250px"
+          base: "sm",
+          md: "250px",
+          lg: "260px",
+          xl: "280px",
         }}
         boxShadow={"2xl"}
         h={{
-          base:"sm",
-          md:"350px"
+          base: "sm",
+          md: "350px",
         }}
         overflow={"hidden"}
         border="3px"
@@ -35,11 +37,10 @@ const GameCard = ({ imageUrl, altText, heading, ratings, url }: Props) => {
             alt={altText}
             borderRadius={"lg"}
             h={{
-              base:"250px",
-              md:"200px"
+              base: "250px",
+              md: "200px",
             }}
-            w={'100%'}
-
+            w={"100%"}
           />
           <Stack mt="6" spacing="3">
             <Heading noOfLines={2} size={"md"}>

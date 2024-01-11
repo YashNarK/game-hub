@@ -18,10 +18,20 @@ const useGames = () => {
         setIsLoading(true);
         const delay = (delayInMilliseconds: number) =>
           new Promise((resolve) => setTimeout(resolve, delayInMilliseconds));
-        await delay(1000);
+        await delay(0);
         const { resp, cancel } = await gameService.get<GameDataResponse>();
         controllerAbort = cancel;
-        setGames(resp.data.results);
+
+        const gamesList = resp.data.results;
+        const gamesListWithWebsites = await Promise.all(
+          gamesList.map(async (game) => {
+            const resp = await gameService.getByID<GameData>(game);
+            game.website = resp.data.website;
+            return game;
+          })
+        );
+
+        setGames(gamesListWithWebsites);
         setHttpErrors("");
       } catch (error) {
         if (error instanceof CanceledError) return;

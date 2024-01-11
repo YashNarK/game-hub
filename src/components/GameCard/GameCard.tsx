@@ -11,14 +11,14 @@ interface Props {
 const GameCard = ({imageUrl,altText,heading,ratings}:Props) => {
   return (
     <>
-      <Card maxW={"sm"}>
+      <Card maxW={"300"}>
         <CardBody>
           <Image
             src={imageUrl}
             alt={altText}
             borderRadius={"lg"}
             h={200}
-            w={350}
+            w={275}
           />
           <Stack mt="6" spacing="3">
             <Heading size={"md"}>{heading}</Heading>

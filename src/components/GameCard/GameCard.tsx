@@ -1,5 +1,6 @@
 import { Card, CardBody, Heading, Stack, Image } from "@chakra-ui/react";
 import StarRatings from "../StarRatings";
+import PlatformIcons from "../PlatformIcons";
 
 interface Props {
   imageUrl: string;
@@ -7,9 +8,10 @@ interface Props {
   heading: string;
   ratings: number;
   gameUrl: string;
+  listOfPlatformSlugs: string[];
 }
 
-const GameCard = ({ imageUrl, altText, heading, ratings, gameUrl }: Props) => {
+const GameCard = ({ imageUrl, altText, heading, ratings, gameUrl,listOfPlatformSlugs }: Props) => {
   return (
     <>
       <Card
@@ -24,8 +26,8 @@ const GameCard = ({ imageUrl, altText, heading, ratings, gameUrl }: Props) => {
         }}
         boxShadow={"2xl"}
         h={{
-          base: "sm",
-          md: "350px",
+          base: "440px",
+          md: "400px",
         }}
         overflow={"hidden"}
         border="3px"
@@ -46,6 +48,7 @@ const GameCard = ({ imageUrl, altText, heading, ratings, gameUrl }: Props) => {
             <Heading noOfLines={2} size={"md"}>
               {heading}
             </Heading>
+            <PlatformIcons listOfPlatformSlugs={listOfPlatformSlugs} />
             <StarRatings ratings={ratings} />
           </Stack>
         </CardBody>

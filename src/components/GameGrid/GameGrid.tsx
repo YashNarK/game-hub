@@ -53,6 +53,7 @@ const GameGrid = () => {
                     heading={game.name}
                     ratings={game.rating}
                     gameUrl={game.website}
+                    listOfPlatformSlugs={game.platform_slugs}
                   />
                 </GridItem>
               );

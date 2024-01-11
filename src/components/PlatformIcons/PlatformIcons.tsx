@@ -32,7 +32,7 @@ const PlatformIcons = ({listOfPlatformSlugs}:Props) => {
   return (<>
   <HStack>
     {
-        listOfPlatformSlugs.map(slug=><Icon as={iconMap[slug]} />)
+        listOfPlatformSlugs.map((slug,index)=><Icon key={index} as={iconMap[slug]} />)
     }
     
   </HStack>

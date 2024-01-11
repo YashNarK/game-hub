@@ -12,11 +12,11 @@ export interface GameData {
   background_image: string;
   website: string;
   rating: number;
-  platforms: PlatformData[];
+  parent_platforms: PlatformData[];
 }
 
 export interface PlatformData {
-  platform: { id: number; name: string[] };
+  platform: { id: number; name: string };
 }
 
 export default create("/games");

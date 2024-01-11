@@ -15,7 +15,9 @@ import useColorModes from "../../hooks/useColorModes";
 const GameGrid = () => {
   const { colorMode } = useColorModes();
   const { games, isLoading, httpErrors } = useGames();
+
   // .platforms.map(x=>x.platform.name)
+
   return (
     <>
       {httpErrors && (
@@ -41,6 +43,11 @@ const GameGrid = () => {
             spacing={4}
           >
             {games.map((game, index) => {
+              // console.log(game.parent_platforms[0].platform.name)
+              const gamePlatformNames = game.parent_platforms.map(
+                (platformObject) => platformObject.platform.name
+              );
+              console.log(gamePlatformNames);
               return (
                 <GridItem key={index} m={"auto"}>
                   <GameCard

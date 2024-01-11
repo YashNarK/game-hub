@@ -36,10 +36,11 @@ const GameCard = ({
         href={gameUrl}
         target="_blank"
         w={{
-          base: "sm",
+          base: "300px",
           md: "250px",
-          lg: "260px",
-          xl: "280px",
+          lg: "280px",
+          xl: "320px",
+          "2xl":"450px"
         }}
         boxShadow={"2xl"}
         h={{

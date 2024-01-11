@@ -13,6 +13,7 @@ export interface GameData {
   website: string;
   rating: number;
   parent_platforms: PlatformData[];
+  platform_names: string[];
 }
 
 export interface PlatformData {

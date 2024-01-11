@@ -1,4 +1,4 @@
-import { Box, Center, HStack, Text } from "@chakra-ui/react";
+import {  HStack, Text } from "@chakra-ui/react";
 import { IoIosStar } from "react-icons/io";
 import { IoIosStarHalf } from "react-icons/io";
 

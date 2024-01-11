@@ -1,8 +1,33 @@
+import { Card, CardBody, Heading, Stack, Image } from "@chakra-ui/react";
+import StarRatings from "../StarRatings";
 
-const GameCard = () => {
-  return (
-    <div>GameCard</div>
-  )
+interface Props {
+  imageUrl: string;
+  altText:string;
+  heading:string;
+  ratings:number;
 }
 
-export default GameCard
+const GameCard = ({imageUrl,altText,heading,ratings}:Props) => {
+  return (
+    <>
+      <Card maxW={"sm"}>
+        <CardBody>
+          <Image
+            src={imageUrl}
+            alt={altText}
+            borderRadius={"lg"}
+            h={200}
+            w={350}
+          />
+          <Stack mt="6" spacing="3">
+            <Heading size={"md"}>{heading}</Heading>
+            <StarRatings ratings={ratings} />
+          </Stack>
+        </CardBody>
+      </Card>
+    </>
+  );
+};
+
+export default GameCard;

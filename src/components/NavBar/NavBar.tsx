@@ -1,13 +1,16 @@
-import { Circle, HStack, Image, useColorModeValue } from "@chakra-ui/react";
+import { Circle, HStack, Image } from "@chakra-ui/react";
 import ToggleModeButton from "../ToggleModeButton";
 import logo from "../../assets/logo.jpg";
+import useColorModes from "../../hooks/useColorModes";
+
 interface Props {
   className?: string;
 }
 
 const NavBar = ({ className = "" }: Props) => {
-  const logoBorderColor = useColorModeValue("gray.800", "white");
-  const logoBorderColorReverse = useColorModeValue("white","gray.800");
+  const {colorMode,reverseColorMode} = useColorModes();
+  const logoBorderColor = colorMode;
+  const logoBorderColorReverse = reverseColorMode;
   return (
     <div className={className}>
       <HStack justifyContent={"space-between"} px={5} py={3}>

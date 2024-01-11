@@ -6,12 +6,13 @@ interface Props {
   altText:string;
   heading:string;
   ratings:number;
+  url:string;
 }
 
-const GameCard = ({imageUrl,altText,heading,ratings}:Props) => {
+const GameCard = ({imageUrl,altText,heading,ratings,url}:Props) => {
   return (
     <>
-      <Card maxW={"300"}>
+      <Card as={'a'} href={url} target="_blank" w={"280px"} boxShadow={'2xl'} h={'350px'} overflow={'hidden'}>
         <CardBody>
           <Image
             src={imageUrl}
@@ -21,7 +22,7 @@ const GameCard = ({imageUrl,altText,heading,ratings}:Props) => {
             w={275}
           />
           <Stack mt="6" spacing="3">
-            <Heading size={"md"}>{heading}</Heading>
+            <Heading noOfLines={2} size={"md"}>{heading}</Heading>
             <StarRatings ratings={ratings} />
           </Stack>
         </CardBody>

@@ -46,6 +46,7 @@ const GameGrid = () => {
                   altText="Game Background image"
                   heading={game.name}
                   ratings={game.rating}
+                  url={game.website}
                 />
               </GridItem>
             ))}

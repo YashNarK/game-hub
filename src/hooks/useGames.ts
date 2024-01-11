@@ -4,6 +4,7 @@ import gameService, {
   GameDataResponse,
 } from "./../services/game-service";
 import { AxiosError, CanceledError } from "../services/api-client";
+import optimizeImage from "../services/image-optimizer";
 
 const useGames = () => {
   const [games, setGames] = useState<GameData[]>([]);
@@ -31,6 +32,7 @@ const useGames = () => {
             game.platform_slugs = gamePlatformNames;
             const resp = await gameService.getByID<GameData>(game);
             game.website = resp.data.website;
+            game.background_image = optimizeImage(game.background_image);
             return game;
           })
         );

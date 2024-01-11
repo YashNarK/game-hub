@@ -14,6 +14,7 @@ export interface GameData {
   rating: number;
   parent_platforms: PlatformData[];
   platform_slugs: string[];
+  metacritic:number;
 }
 
 export interface PlatformData {

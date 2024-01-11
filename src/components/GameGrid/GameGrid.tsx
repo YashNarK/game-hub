@@ -40,7 +40,7 @@ const GameGrid = () => {
               lg: 3,
               "2xl": 4,
             }}
-            spacing={4}
+            spacing={6}
           >
             {games.map((game, index) => {
               // console.log(game.parent_platforms[0].platform.name)
@@ -54,6 +54,7 @@ const GameGrid = () => {
                     ratings={game.rating}
                     gameUrl={game.website}
                     listOfPlatformSlugs={game.platform_slugs}
+                    criticScore={game.metacritic}
                   />
                 </GridItem>
               );

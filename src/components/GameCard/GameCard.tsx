@@ -1,4 +1,12 @@
-import { Card, CardBody, Heading, Stack, Image } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  Heading,
+  Stack,
+  Image,
+  Badge,
+  Flex,
+} from "@chakra-ui/react";
 import StarRatings from "../StarRatings";
 import PlatformIcons from "../PlatformIcons";
 
@@ -9,9 +17,18 @@ interface Props {
   ratings: number;
   gameUrl: string;
   listOfPlatformSlugs: string[];
+  criticScore: number;
 }
 
-const GameCard = ({ imageUrl, altText, heading, ratings, gameUrl,listOfPlatformSlugs }: Props) => {
+const GameCard = ({
+  imageUrl,
+  altText,
+  heading,
+  ratings,
+  gameUrl,
+  listOfPlatformSlugs,
+  criticScore,
+}: Props) => {
   return (
     <>
       <Card
@@ -48,7 +65,11 @@ const GameCard = ({ imageUrl, altText, heading, ratings, gameUrl,listOfPlatformS
             <Heading noOfLines={2} size={"md"}>
               {heading}
             </Heading>
-            <PlatformIcons listOfPlatformSlugs={listOfPlatformSlugs} />
+            <Flex justifyContent={'space-between'}>
+              <PlatformIcons listOfPlatformSlugs={listOfPlatformSlugs} />
+              <Badge colorScheme="green" w={6}>{criticScore}</Badge>
+            </Flex>
+
             <StarRatings ratings={ratings} />
           </Stack>
         </CardBody>

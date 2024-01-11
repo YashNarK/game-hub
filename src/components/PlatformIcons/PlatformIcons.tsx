@@ -11,6 +11,7 @@ import { SiNintendo } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import { IconType } from "react-icons";
 import { HStack, Icon } from "@chakra-ui/react";
+import useColorModes from "../../hooks/useColorModes";
 
 interface Props {
   listOfPlatformSlugs: string[];
@@ -29,10 +30,11 @@ const iconMap: { [key: string]: IconType } = {
 };
 
 const PlatformIcons = ({listOfPlatformSlugs}:Props) => {
+    const {colorModeDarker} = useColorModes()
   return (<>
   <HStack>
     {
-        listOfPlatformSlugs.map((slug,index)=><Icon key={index} as={iconMap[slug]} />)
+        listOfPlatformSlugs.map((slug,index)=><Icon color={colorModeDarker} key={index} as={iconMap[slug]} />)
     }
     
   </HStack>

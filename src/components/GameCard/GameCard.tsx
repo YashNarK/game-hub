@@ -4,11 +4,11 @@ import {
   Heading,
   Stack,
   Image,
-  Badge,
   Flex,
 } from "@chakra-ui/react";
 import StarRatings from "../StarRatings";
 import PlatformIcons from "../PlatformIcons";
+import MetaCriticBadge from "../MetaCriticBadge";
 
 interface Props {
   imageUrl: string;
@@ -37,10 +37,10 @@ const GameCard = ({
         target="_blank"
         w={{
           base: "300px",
-          md: "250px",
-          lg: "280px",
-          xl: "320px",
-          "2xl":"450px"
+          md: "230px",
+          lg: "250px",
+          xl: "280px",
+          "2xl":"300px"
         }}
         boxShadow={"2xl"}
         h={{
@@ -68,7 +68,8 @@ const GameCard = ({
             </Heading>
             <Flex justifyContent={'space-between'}>
               <PlatformIcons listOfPlatformSlugs={listOfPlatformSlugs} />
-              <Badge colorScheme="green" w={6}>{criticScore}</Badge>
+              {/* <Badge fontSize={'14px'} px={2} colorScheme="green" borderRadius={'8px'} w={8}>{criticScore}</Badge> */}
+              <MetaCriticBadge criticScore={criticScore} />
             </Flex>
 
             <StarRatings ratings={ratings} />

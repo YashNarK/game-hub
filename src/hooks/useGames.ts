@@ -26,10 +26,9 @@ const useGames = () => {
         const gamesListWithWebsites = await Promise.all(
           gamesList.map(async (game) => {
             const gamePlatformNames = game.parent_platforms.map(
-              (platformObject) => platformObject.platform.name
+              (platformObject) => platformObject.platform.slug
             );
-            console.log(gamePlatformNames);
-            game.platform_names = gamePlatformNames;
+            game.platform_slugs = gamePlatformNames;
             const resp = await gameService.getByID<GameData>(game);
             game.website = resp.data.website;
             return game;

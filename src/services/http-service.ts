@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from "axios";
 import apiClient from "./api-client";
 
 interface Entity {
@@ -10,10 +11,10 @@ class HttpService {
     this.endpoint = endpoint;
   }
 
-  async get<T>() {
+  async get<T>( requestConfig?:AxiosRequestConfig) {
     const controller = new AbortController();
     const resp = await apiClient.get<T>(this.endpoint, {
-      signal: controller.signal,
+      signal: controller.signal,...requestConfig
     });
     return {
       resp,
@@ -23,10 +24,10 @@ class HttpService {
     };
   }
 
-  async getAll<T>() {
+  async getAll<T>(requestConfig?:AxiosRequestConfig) {
     const controller = new AbortController();
     const resp = await apiClient.get<T[]>(this.endpoint, {
-      signal: controller.signal,
+      signal: controller.signal,...requestConfig
     });
     return {
       resp,

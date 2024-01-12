@@ -1,9 +1,14 @@
 import create from "./http-service";
 
+interface ParentPlatformData {
+  id: number;
+  name: string;
+  slug: string;
+}
 
 interface PlatformData {
-    platform: { id: number; name: string; slug: string };
-  }
+  platform: ParentPlatformData;
+}
 
-  export default create("/platforms");
-  export type {PlatformData};
+export default create("/platforms");
+export type { PlatformData,ParentPlatformData };

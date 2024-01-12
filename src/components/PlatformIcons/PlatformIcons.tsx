@@ -12,9 +12,10 @@ import { BsGlobe } from "react-icons/bs";
 import { IconType } from "react-icons";
 import { HStack, Icon } from "@chakra-ui/react";
 import useColorModes from "../../hooks/useColorModes";
+import { PlatformData } from "../../services/game-service";
 
 interface Props {
-  listOfPlatformSlugs: string[];
+  platforms: PlatformData[];
 }
 
 const iconMap: { [key: string]: IconType } = {
@@ -29,16 +30,24 @@ const iconMap: { [key: string]: IconType } = {
   android: FaAndroid,
 };
 
-const PlatformIcons = ({listOfPlatformSlugs}:Props) => {
-    const {colorModeDarker} = useColorModes()
-  return (<>
-  <HStack>
-    {
-        listOfPlatformSlugs.map((slug,index)=><Icon color={colorModeDarker} key={index} as={iconMap[slug]} />)
-    }
-    
-  </HStack>
-  </>);
+const PlatformIcons = ({ platforms }: Props) => {
+  const { colorModeDarker } = useColorModes();
+  return (
+    <>
+      <HStack>
+        {
+          // listOfPlatformSlugs.map((slug,index)=><Icon color={colorModeDarker} key={index} as={iconMap[slug]} />)
+          platforms.map(({ platform }) => (
+            <Icon
+              color={colorModeDarker}
+              key={platform.id}
+              as={iconMap[platform.slug]}
+            />
+          ))
+        }
+      </HStack>
+    </>
+  );
 };
 
 export default PlatformIcons;

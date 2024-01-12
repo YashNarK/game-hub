@@ -13,7 +13,6 @@ import create from "./http-service";
   website: string;
   rating: number;
   parent_platforms: PlatformData[];
-  platform_slugs: string[];
   metacritic:number;
 }
 

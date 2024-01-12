@@ -13,9 +13,10 @@ import useGames from "../../hooks/useGames";
 import GameCard from "../GameCard";
 import GameCardSkeleton from "../GameCardSkeleton";
 import useColorModes from "../../hooks/useColorModes";
+import optimizeImage from "../../services/image-optimizer";
 
-const GameGrid = () => {
-  const { games, isLoading, httpErrors } = useGames();
+const GameGrid =  () => {
+  const { games, isLoading, httpErrors } =  useGames();
 
   const { colorMode } = useColorModes();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -65,12 +66,12 @@ const GameGrid = () => {
             return (
               <GridItem key={index} m={"auto"}>
                 <GameCard
-                  imageUrl={game.background_image}
+                  imageUrl={optimizeImage(game.background_image)}
                   altText="Game Background image"
                   heading={game.name}
                   ratings={game.rating}
                   gameUrl={game.website}
-                  listOfPlatformSlugs={game.platform_slugs}
+                  parent_platforms={game.parent_platforms}
                   criticScore={game.metacritic}
                 />
               </GridItem>

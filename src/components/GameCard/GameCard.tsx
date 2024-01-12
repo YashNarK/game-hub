@@ -2,6 +2,7 @@ import { Card, CardBody, Heading, Stack, Image, Flex } from "@chakra-ui/react";
 import StarRatings from "../StarRatings";
 import PlatformIcons from "../PlatformIcons";
 import MetaCriticBadge from "../MetaCriticBadge";
+import { PlatformData } from "../../services/game-service";
 
 interface Props {
   imageUrl: string;
@@ -9,7 +10,7 @@ interface Props {
   heading: string;
   ratings: number;
   gameUrl: string;
-  listOfPlatformSlugs: string[];
+  parent_platforms: PlatformData[];
   criticScore: number;
 }
 
@@ -19,7 +20,7 @@ const GameCard = ({
   heading,
   ratings,
   gameUrl,
-  listOfPlatformSlugs,
+  parent_platforms,
   criticScore,
 }: Props) => {
   return (
@@ -58,7 +59,7 @@ const GameCard = ({
               {heading}
             </Heading>
             <Flex justifyContent={"space-between"}>
-              <PlatformIcons listOfPlatformSlugs={listOfPlatformSlugs} />
+              <PlatformIcons platforms={parent_platforms} />
               <MetaCriticBadge criticScore={criticScore} />
             </Flex>
 

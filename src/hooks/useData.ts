@@ -4,6 +4,7 @@ import { AxiosError } from "../services/api-client";
 import { HttpService } from "../services/http-service";
 
 interface ResponseData<T> {
+  count: number;
   results: T[];
 }
 

@@ -1,11 +1,11 @@
 import create from "./http-service";
 
-export interface GameDataResponse {
+ interface GameDataResponse {
   count: number;
   results: GameData[];
 }
 
-export interface GameData {
+ interface GameData {
   id: number;
   name: string;
   description: string;
@@ -17,8 +17,9 @@ export interface GameData {
   metacritic:number;
 }
 
-export interface PlatformData {
+ interface PlatformData {
   platform: { id: number; name: string; slug: string };
 }
 
 export default create("/games");
+export type {GameData,GameDataResponse,PlatformData}

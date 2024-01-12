@@ -15,4 +15,4 @@ interface GenreData {
 }
 
 export default create("/genres");
-export { GenreResponseData, GenreData };
+export type { GenreResponseData, GenreData };

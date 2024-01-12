@@ -1,10 +1,7 @@
 import { GenreData } from "./genre-service";
 import create from "./http-service";
+import { PlatformData } from "./platfrom-service";
 
- interface GameDataResponse {
-  count: number;
-  results: GameData[];
-}
 
  interface GameData {
   id: number;
@@ -18,9 +15,7 @@ import create from "./http-service";
   genres:GenreData[]
 }
 
- interface PlatformData {
-  platform: { id: number; name: string; slug: string };
-}
+
 
 export default create("/games");
-export type {GameData,GameDataResponse,PlatformData}
+export type {GameData}

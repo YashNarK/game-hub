@@ -1,9 +1,6 @@
 import create from "./http-service";
 
-interface GenreResponseData {
-  count: number;
-  results: GenreData[];
-}
+
 
 interface GenreData {
   id: number;
@@ -15,4 +12,4 @@ interface GenreData {
 }
 
 export default create("/genres");
-export type { GenreResponseData, GenreData };
+export type {  GenreData };

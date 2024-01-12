@@ -2,7 +2,7 @@ import { Card, CardBody, Heading, Stack, Image, Flex } from "@chakra-ui/react";
 import StarRatings from "../StarRatings";
 import PlatformIcons from "../PlatformIcons";
 import MetaCriticBadge from "../MetaCriticBadge";
-import { PlatformData } from "../../services/game-service";
+import { PlatformData } from "../../services/platfrom-service";
 
 interface Props {
   imageUrl: string;

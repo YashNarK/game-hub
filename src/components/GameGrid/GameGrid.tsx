@@ -32,7 +32,10 @@ const GameGrid =  () => {
         <VStack>
           <Box color={colorMode} my={5}>
             <Spinner mx={10} size={"xl"} />{" "}
-            <Heading display={"inline"}>Games List is Loading ...</Heading>{" "}
+            <Heading display={"inline"} fontSize={{
+              base:'xl',
+              md:'2xl',
+            }}>Games List is Loading ...</Heading>{" "}
           </Box>
           <SimpleGrid
             columns={{

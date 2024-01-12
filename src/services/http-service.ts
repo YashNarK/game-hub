@@ -10,7 +10,7 @@ class HttpService {
     this.endpoint = endpoint;
   }
 
-  async get<T>(){
+  async get<T>() {
     const controller = new AbortController();
     const resp = await apiClient.get<T>(this.endpoint, {
       signal: controller.signal,
@@ -37,10 +37,11 @@ class HttpService {
   }
 
   async getByID<T extends Entity>(entity: T) {
-    const resp = await apiClient.get<T>(this.endpoint +'/'+ entity.id);
+    const resp = await apiClient.get<T>(this.endpoint + "/" + entity.id);
     return resp;
   }
 }
 
 const create = (endpoint: string) => new HttpService(endpoint);
 export default create;
+export { HttpService };

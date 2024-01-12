@@ -15,14 +15,16 @@ import GameCardSkeleton from "../GameCardSkeleton";
 import useColorModes from "../../hooks/useColorModes";
 import optimizeImage from "../../services/image-optimizer";
 import { GenreData } from "../../services/genre-service";
+import { ParentPlatformData } from "../../services/platfrom-service";
 
 interface Props {
   selectedGenre: GenreData|null;
+  selectedPlatform: ParentPlatformData|null;
 }
 
-const GameGrid = ({ selectedGenre }: Props) => {
+const GameGrid = ({ selectedGenre,selectedPlatform }: Props) => {
 
-  const { games, isLoading, httpErrors } = useGames({params:{genres:selectedGenre?.id}}, [selectedGenre]);
+  const { games, isLoading, httpErrors } = useGames({params:{genres:selectedGenre?.id, platforms:selectedPlatform?.id}}, [selectedGenre,selectedPlatform]);
 
 
   const { colorMode } = useColorModes();

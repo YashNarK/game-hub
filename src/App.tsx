@@ -3,11 +3,12 @@ import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
+import { GenreData } from "./services/genre-service";
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<string>("");
+  const [selectedGenre, setSelectedGenre] = useState<GenreData|null>(null);
 
-  const handleGenreSelect = (selectedGenre: string) => {
+  const handleGenreSelect = (selectedGenre:GenreData|null) => {
     setSelectedGenre(selectedGenre);
   };
   return (

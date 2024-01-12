@@ -12,9 +12,10 @@ import {
 import useGenres from "../../hooks/useGenres";
 import optimizeImage from "../../services/image-optimizer";
 import { GiVibratingBall } from "react-icons/gi";
+import { GenreData } from "../../services/genre-service";
 
 interface Props {
-  onGenreSelect: (selectedGenre:string) => void;
+  onGenreSelect: (selectedGenre:GenreData|null) => void;
 }
 
 const GenreList = ({onGenreSelect}:Props) => {
@@ -44,7 +45,7 @@ const GenreList = ({onGenreSelect}:Props) => {
             <HStack spacing={2}>
               <ListIcon as={GiVibratingBall} boxSize={"32px"} />{" "}
               <Button onClick={()=>{
-                  onGenreSelect('')
+                  onGenreSelect(null)
                 }} variant={"link"} fontSize={"lg"}>
                 All
               </Button>
@@ -61,7 +62,7 @@ const GenreList = ({onGenreSelect}:Props) => {
                   borderRadius={8}
                 />
                 <Button onClick={()=>{
-                  onGenreSelect(genre.slug)
+                  onGenreSelect(genre)
                 }} variant={"link"} fontSize={"lg"}>
                   {genre.name}
                 </Button>

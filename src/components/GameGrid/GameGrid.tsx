@@ -14,17 +14,16 @@ import GameCard from "../GameCard";
 import GameCardSkeleton from "../GameCardSkeleton";
 import useColorModes from "../../hooks/useColorModes";
 import optimizeImage from "../../services/image-optimizer";
+import { GenreData } from "../../services/genre-service";
 
 interface Props {
-  selectedGenre: string;
+  selectedGenre: GenreData|null;
 }
 
 const GameGrid = ({ selectedGenre }: Props) => {
-  const { games, isLoading, httpErrors } = useGames();
-  const gamesFiltered = games.filter((game) => {
-    if (!selectedGenre) return true;
-    return game.genres.map((g) => g.slug).includes(selectedGenre);
-  });
+
+  const { games, isLoading, httpErrors } = useGames({params:{genres:selectedGenre?.id}}, [selectedGenre]);
+
 
   const { colorMode } = useColorModes();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -77,7 +76,7 @@ const GameGrid = ({ selectedGenre }: Props) => {
           }}
           spacing={6}
         >
-          {gamesFiltered.map((game, index) => {
+          {games.map((game, index) => {
 
             return (
               <GridItem key={index} m={"auto"}>

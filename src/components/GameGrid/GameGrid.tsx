@@ -15,13 +15,22 @@ import GameCardSkeleton from "../GameCardSkeleton";
 import useColorModes from "../../hooks/useColorModes";
 import optimizeImage from "../../services/image-optimizer";
 
-const GameGrid =  () => {
-  const { games, isLoading, httpErrors } =  useGames();
+interface Props {
+  selectedGenre: string;
+}
+
+const GameGrid = ({ selectedGenre }: Props) => {
+  const { games, isLoading, httpErrors } = useGames();
+  const gamesFiltered = games.filter((game) => {
+    if (!selectedGenre) return true;
+    return game.genres.map((g) => g.slug).includes(selectedGenre);
+  });
 
   const { colorMode } = useColorModes();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
     <>
+
       {httpErrors && (
         <Alert status="error" variant={"solid"} mb={3}>
           <AlertIcon />
@@ -32,10 +41,15 @@ const GameGrid =  () => {
         <VStack>
           <Box color={colorMode} my={5}>
             <Spinner mx={10} size={"xl"} />{" "}
-            <Heading display={"inline"} fontSize={{
-              base:'xl',
-              md:'2xl',
-            }}>Games List is Loading ...</Heading>{" "}
+            <Heading
+              display={"inline"}
+              fontSize={{
+                base: "xl",
+                md: "2xl",
+              }}
+            >
+              Games List is Loading ...
+            </Heading>{" "}
           </Box>
           <SimpleGrid
             columns={{
@@ -63,8 +77,7 @@ const GameGrid =  () => {
           }}
           spacing={6}
         >
-          {games.map((game, index) => {
-            // console.log(game.parent_platforms[0].platform.name)
+          {gamesFiltered.map((game, index) => {
 
             return (
               <GridItem key={index} m={"auto"}>

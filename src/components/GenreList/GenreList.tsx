@@ -61,7 +61,7 @@ const GenreList = ({onGenreSelect}:Props) => {
                   borderRadius={8}
                 />
                 <Button onClick={()=>{
-                  onGenreSelect(genre.name)
+                  onGenreSelect(genre.slug)
                 }} variant={"link"} fontSize={"lg"}>
                   {genre.name}
                 </Button>

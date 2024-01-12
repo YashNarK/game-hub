@@ -1,3 +1,4 @@
+import { GenreData } from "./genre-service";
 import create from "./http-service";
 
  interface GameDataResponse {
@@ -14,6 +15,7 @@ import create from "./http-service";
   rating: number;
   parent_platforms: PlatformData[];
   metacritic:number;
+  genres:GenreData[]
 }
 
  interface PlatformData {

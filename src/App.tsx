@@ -5,12 +5,11 @@ import GenreList from "./components/GenreList";
 import { useState } from "react";
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState(null);
+  const [selectedGenre, setSelectedGenre] = useState<string>("");
 
-  const handleGenreSelect= (selectedGenre:string)=>{
-    console.log(selectedGenre)
-  }
-
+  const handleGenreSelect = (selectedGenre: string) => {
+    setSelectedGenre(selectedGenre);
+  };
   return (
     <>
       <Grid
@@ -30,11 +29,11 @@ function App() {
         </GridItem>
         <Show above="md">
           <GridItem area={"aside"} px={3}>
-            <GenreList onGenreSelect={handleGenreSelect}/>
+            <GenreList onGenreSelect={handleGenreSelect} />
           </GridItem>
         </Show>
         <GridItem area={"main"}>
-          <GameGrid />
+          <GameGrid selectedGenre={selectedGenre} />
         </GridItem>
       </Grid>
     </>

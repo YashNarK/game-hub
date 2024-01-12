@@ -53,7 +53,7 @@ const GenreList = ({ onGenreSelect, selectedGenre }: Props) => {
       {isLoading && <Spinner size={"xl"} />}
 
       {!httpErrors && (
-        <List spacing={2}>
+        <List spacing={2} maxH={'15cm'} overflow={'auto'}>
           <ListItem py={1}>
             <HStack spacing={2}>
               <ListIcon as={GiVibratingBall} boxSize={"32px"} />{" "}

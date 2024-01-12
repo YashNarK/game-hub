@@ -1,11 +1,4 @@
-import {
-  Card,
-  CardBody,
-  Heading,
-  Stack,
-  Image,
-  Flex,
-} from "@chakra-ui/react";
+import { Card, CardBody, Heading, Stack, Image, Flex } from "@chakra-ui/react";
 import StarRatings from "../StarRatings";
 import PlatformIcons from "../PlatformIcons";
 import MetaCriticBadge from "../MetaCriticBadge";
@@ -40,16 +33,14 @@ const GameCard = ({
           md: "230px",
           lg: "250px",
           xl: "280px",
-          "2xl":"300px"
+          "2xl": "300px",
         }}
         boxShadow={"2xl"}
         h={{
           base: "440px",
-          md: "400px",
+          md: "380px",
         }}
         overflow={"hidden"}
-        border="3px"
-        borderColor="black"
       >
         <CardBody>
           <Image
@@ -66,9 +57,8 @@ const GameCard = ({
             <Heading noOfLines={2} size={"md"}>
               {heading}
             </Heading>
-            <Flex justifyContent={'space-between'}>
+            <Flex justifyContent={"space-between"}>
               <PlatformIcons listOfPlatformSlugs={listOfPlatformSlugs} />
-              {/* <Badge fontSize={'14px'} px={2} colorScheme="green" borderRadius={'8px'} w={8}>{criticScore}</Badge> */}
               <MetaCriticBadge criticScore={criticScore} />
             </Flex>
 

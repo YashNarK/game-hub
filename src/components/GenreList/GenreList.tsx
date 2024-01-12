@@ -6,10 +6,12 @@ import {
   List,
   ListItem,
   Spinner,
-  Text,
+  Button,
+  ListIcon,
 } from "@chakra-ui/react";
 import useGenres from "../../hooks/useGenres";
 import optimizeImage from "../../services/image-optimizer";
+import { GiVibratingBall } from "react-icons/gi";
 
 const GenreList = () => {
   const { genres, isLoading, httpErrors } = useGenres();
@@ -27,6 +29,13 @@ const GenreList = () => {
 
       {!httpErrors && (
         <List spacing={2}>
+          <ListItem py={1}>
+          <HStack spacing={2}>
+            <ListIcon as={GiVibratingBall} boxSize={"32px"}/>
+                {" "}
+                <Button variant={'link'} fontSize={"lg"}>All</Button>
+                </HStack>
+          </ListItem>
           {genres.map((genre) => (
             <ListItem key={genre.id} py={1}>
               <HStack spacing={2}>
@@ -37,7 +46,7 @@ const GenreList = () => {
                   boxSize={"32px"}
                   borderRadius={8}
                 />
-                <Text fontSize={"lg"}>{genre.name}</Text>
+                <Button variant={'link'} fontSize={"lg"}>{genre.name}</Button>
               </HStack>
             </ListItem>
           ))}

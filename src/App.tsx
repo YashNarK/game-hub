@@ -7,20 +7,22 @@ import { GenreData } from "./services/genre-service";
 import PlatformSelector from "./components/PlatformSelector";
 import { ParentPlatformData } from "./services/platfrom-service";
 import OrderSelector from "./components/OrderSelector";
-import { OrderSortOptions } from "./components/OrderSelector/OrderSelector";
 
 function App() {
   // Use States
   const [selectedGenre, setSelectedGenre] = useState<GenreData | null>(null);
   const [selectedPlatform, setSelectedPlatform] =
     useState<ParentPlatformData | null>(null);
-  const [selectedOrderOption, setSelectedOrderOption] =
-    useState<OrderSortOptions>(null);
+  const [selectedOrderOption, setSelectedOrderOption] = useState<string | null>(
+    null
+  );
+
+  const [isAscending, setIsAscending] = useState(true);
 
   // Use Effects
-  useEffect(()=>{
+  useEffect(() => {
     setSelectedOrderOption(selectedOrderOption);
-  },[])
+  }, []);
 
   // handler functions
   const handleGenreSelect = (selectedGenre: GenreData | null) => {
@@ -33,11 +35,10 @@ function App() {
     setSelectedPlatform(selectedPlatform);
     console.log(selectedPlatform);
   };
-  const handleSortSelect = (selectedSortOption: OrderSortOptions) => {
+  const handleSortSelect = (selectedSortOption: string | null) => {
     setSelectedOrderOption(selectedSortOption);
+    setIsAscending(true);
   };
-
-
 
   return (
     <>
@@ -68,7 +69,18 @@ function App() {
           <HStack gap={10} my={5} px={5}>
             <OrderSelector
               selectedOption={selectedOrderOption}
+              isAscending={isAscending}
               onSortOptionSelection={handleSortSelect}
+              onAscDescToggle={() => {
+                if (isAscending)
+                  setSelectedOrderOption("-" + selectedOrderOption);
+                else {
+                  selectedOrderOption?.slice(0, 1) === "-"
+                    ? setSelectedOrderOption(selectedOrderOption?.slice(1))
+                    : null;
+                }
+                setIsAscending(!isAscending);
+              }}
             />
             <PlatformSelector
               selectedPlatform={selectedPlatform}
@@ -79,7 +91,7 @@ function App() {
           <GameGrid
             selectedPlatform={selectedPlatform}
             selectedGenre={selectedGenre}
-            selectedOrderBy = {selectedOrderOption}
+            selectedOrderBy={selectedOrderOption}
           />
         </GridItem>
       </Grid>

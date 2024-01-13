@@ -10,25 +10,20 @@ import {
 import { FaChevronDown } from "react-icons/fa";
 import { toCapitalize } from "../../services/utility";
 
-type OrderSortOptions =
-  | "name"
-  | "released"
-  | "added"
-  | "created"
-  | "updated"
-  | "rating"
-  | "metacritic"
-  | null;
-
 interface Props {
-  onSortOptionSelection: (selectedOption: OrderSortOptions) => void;
-  selectedOption: OrderSortOptions;
+  onSortOptionSelection: (selectedOption: string | null) => void;
+  onAscDescToggle: () => void;
+  selectedOption: string | null;
+  isAscending: boolean;
 }
 
-const OrderSelector = ({ selectedOption, onSortOptionSelection }: Props) => {
-
-
-  const sortByOptions: OrderSortOptions[] = [
+const OrderSelector = ({
+  isAscending,
+  onAscDescToggle,
+  selectedOption,
+  onSortOptionSelection,
+}: Props) => {
+  const sortByOptions: string[] = [
     "name",
     "released",
     "added",
@@ -43,7 +38,7 @@ const OrderSelector = ({ selectedOption, onSortOptionSelection }: Props) => {
       <HStack>
         <Menu isLazy>
           <MenuButton as={Button} rightIcon={<FaChevronDown />}>
-            Order by: {selectedOption ? toCapitalize(selectedOption) : "None"}
+            Order by: {selectedOption ? toCapitalize(selectedOption.replace(/-/g, '')) : "None"}
           </MenuButton>
           <MenuList maxH={"8cm"} overflowY={"auto"}>
             <MenuItem
@@ -65,13 +60,17 @@ const OrderSelector = ({ selectedOption, onSortOptionSelection }: Props) => {
             ))}
           </MenuList>
         </Menu>
-        <Badge as={Button} colorScheme="yellow" h={"20px"}>
-          ASC
-        </Badge>
+        {selectedOption && <Badge
+          onClick={onAscDescToggle}
+          as={Button}
+          colorScheme="yellow"
+          h={"20px"}
+        >
+          {isAscending ? "ASC" : "DESC"}
+        </Badge>}
       </HStack>
     </>
   );
 };
 
 export default OrderSelector;
-export type { OrderSortOptions };

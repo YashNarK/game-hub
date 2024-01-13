@@ -16,12 +16,11 @@ import useColorModes from "../../hooks/useColorModes";
 import optimizeImage from "../../services/image-optimizer";
 import { GenreData } from "../../services/genre-service";
 import { ParentPlatformData } from "../../services/platfrom-service";
-import { OrderSortOptions } from "../OrderSelector/OrderSelector";
 
 interface Props {
   selectedGenre: GenreData | null;
   selectedPlatform: ParentPlatformData | null;
-  selectedOrderBy: OrderSortOptions| null;
+  selectedOrderBy: string | null;
 }
 
 const GameGrid = ({
@@ -32,12 +31,12 @@ const GameGrid = ({
   const { games, isLoading, httpErrors } = useGames(
     {
       params: {
-        ordering:selectedOrderBy && selectedOrderBy,
+        ordering: selectedOrderBy && selectedOrderBy,
         genres: selectedGenre?.id,
         platforms: selectedPlatform?.id,
       },
     },
-    [selectedGenre, selectedPlatform,selectedOrderBy]
+    [selectedGenre, selectedPlatform, selectedOrderBy]
   );
 
   const { colorMode } = useColorModes();
@@ -91,7 +90,6 @@ const GameGrid = ({
           spacing={6}
         >
           {games.map((game, index) => {
-            console.log(games[0])
             return (
               <GridItem key={index} m={"auto"}>
                 <GameCard

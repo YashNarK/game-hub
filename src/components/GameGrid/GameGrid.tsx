@@ -16,22 +16,34 @@ import useColorModes from "../../hooks/useColorModes";
 import optimizeImage from "../../services/image-optimizer";
 import { GenreData } from "../../services/genre-service";
 import { ParentPlatformData } from "../../services/platfrom-service";
+import { OrderSortOptions } from "../OrderSelector/OrderSelector";
 
 interface Props {
-  selectedGenre: GenreData|null;
-  selectedPlatform: ParentPlatformData|null;
+  selectedGenre: GenreData | null;
+  selectedPlatform: ParentPlatformData | null;
+  selectedOrderBy: OrderSortOptions| null;
 }
 
-const GameGrid = ({ selectedGenre,selectedPlatform }: Props) => {
-
-  const { games, isLoading, httpErrors } = useGames({params:{genres:selectedGenre?.id, platforms:selectedPlatform?.id}}, [selectedGenre,selectedPlatform]);
-
+const GameGrid = ({
+  selectedOrderBy,
+  selectedGenre,
+  selectedPlatform,
+}: Props) => {
+  const { games, isLoading, httpErrors } = useGames(
+    {
+      params: {
+        ordering:selectedOrderBy && selectedOrderBy,
+        genres: selectedGenre?.id,
+        platforms: selectedPlatform?.id,
+      },
+    },
+    [selectedGenre, selectedPlatform,selectedOrderBy]
+  );
 
   const { colorMode } = useColorModes();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
     <>
-
       {httpErrors && (
         <Alert status="error" variant={"solid"} mb={3}>
           <AlertIcon />
@@ -79,7 +91,7 @@ const GameGrid = ({ selectedGenre,selectedPlatform }: Props) => {
           spacing={6}
         >
           {games.map((game, index) => {
-
+            console.log(games[0])
             return (
               <GridItem key={index} m={"auto"}>
                 <GameCard

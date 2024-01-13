@@ -1,4 +1,12 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import {
+  Badge,
+  Button,
+  HStack,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 import { toCapitalize } from "../../services/utility";
 
@@ -9,14 +17,16 @@ type OrderSortOptions =
   | "created"
   | "updated"
   | "rating"
-  | "metacritic";
+  | "metacritic"
+  | null;
 
 interface Props {
   onSortOptionSelection: (selectedOption: OrderSortOptions) => void;
   selectedOption: OrderSortOptions;
 }
 
-const OrderSelector = ({selectedOption, onSortOptionSelection }: Props) => {
+const OrderSelector = ({ selectedOption, onSortOptionSelection }: Props) => {
+
 
   const sortByOptions: OrderSortOptions[] = [
     "name",
@@ -30,23 +40,35 @@ const OrderSelector = ({selectedOption, onSortOptionSelection }: Props) => {
 
   return (
     <>
-      <Menu isLazy>
-        <MenuButton as={Button} rightIcon={<FaChevronDown />}>
-          Order by: {toCapitalize(selectedOption)}
-        </MenuButton>
-        <MenuList maxH={"8cm"} overflowY={"auto"}>
-          {sortByOptions.map((option, index) => (
+      <HStack>
+        <Menu isLazy>
+          <MenuButton as={Button} rightIcon={<FaChevronDown />}>
+            Order by: {selectedOption ? toCapitalize(selectedOption) : "None"}
+          </MenuButton>
+          <MenuList maxH={"8cm"} overflowY={"auto"}>
             <MenuItem
               onClick={() => {
-                onSortOptionSelection(option);
+                onSortOptionSelection(null);
               }}
-              key={index}
             >
-              {toCapitalize(option)}
+              None
             </MenuItem>
-          ))}
-        </MenuList>
-      </Menu>
+            {sortByOptions.map((option, index) => (
+              <MenuItem
+                onClick={() => {
+                  onSortOptionSelection(option);
+                }}
+                key={index}
+              >
+                {toCapitalize(option)}
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Menu>
+        <Badge as={Button} colorScheme="yellow" h={"20px"}>
+          ASC
+        </Badge>
+      </HStack>
     </>
   );
 };

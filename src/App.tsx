@@ -14,12 +14,12 @@ function App() {
   const [selectedGenre, setSelectedGenre] = useState<GenreData | null>(null);
   const [selectedPlatform, setSelectedPlatform] =
     useState<ParentPlatformData | null>(null);
-  const [selectedOption, setSelectedOption] =
-    useState<OrderSortOptions>("name");
+  const [selectedOrderOption, setSelectedOrderOption] =
+    useState<OrderSortOptions>(null);
 
   // Use Effects
   useEffect(()=>{
-    setSelectedOption(selectedOption);
+    setSelectedOrderOption(selectedOrderOption);
   },[])
 
   // handler functions
@@ -34,7 +34,7 @@ function App() {
     console.log(selectedPlatform);
   };
   const handleSortSelect = (selectedSortOption: OrderSortOptions) => {
-    setSelectedOption(selectedSortOption);
+    setSelectedOrderOption(selectedSortOption);
   };
 
 
@@ -67,7 +67,7 @@ function App() {
         <GridItem area={"main"}>
           <HStack gap={10} my={5} px={5}>
             <OrderSelector
-              selectedOption={selectedOption}
+              selectedOption={selectedOrderOption}
               onSortOptionSelection={handleSortSelect}
             />
             <PlatformSelector
@@ -79,6 +79,7 @@ function App() {
           <GameGrid
             selectedPlatform={selectedPlatform}
             selectedGenre={selectedGenre}
+            selectedOrderBy = {selectedOrderOption}
           />
         </GridItem>
       </Grid>

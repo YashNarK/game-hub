@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-} from "@chakra-ui/react";
+import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 import usePlatform from "../../hooks/usePlatform";
 import { ParentPlatformData } from "../../services/platfrom-service";
@@ -15,36 +8,34 @@ interface Props {
   selectedPlatform: ParentPlatformData | null;
 }
 
-const PlatformSelector = ({ onPlatformSelect,selectedPlatform }: Props) => {
+const PlatformSelector = ({ onPlatformSelect, selectedPlatform }: Props) => {
   const { platforms } = usePlatform();
 
   return (
-    <Box mb={3}>
-      <Menu isLazy>
-        <MenuButton as={Button} rightIcon={<FaChevronDown />}>
-          Platforms : {selectedPlatform? selectedPlatform.name:'All'}
-        </MenuButton>
-        <MenuList maxH="8cm" overflowY="auto">
+    <Menu isLazy>
+      <MenuButton as={Button} rightIcon={<FaChevronDown />}>
+        Platforms : {selectedPlatform ? selectedPlatform.name : "All"}
+      </MenuButton>
+      <MenuList maxH="8cm" overflowY="auto">
+        <MenuItem
+          onClick={() => {
+            onPlatformSelect(null);
+          }}
+        >
+          All
+        </MenuItem>
+        {platforms.map((platform) => (
           <MenuItem
             onClick={() => {
-              onPlatformSelect(null);
+              onPlatformSelect(platform);
             }}
+            key={platform.id}
           >
-            All
+            {platform.name}
           </MenuItem>
-          {platforms.map((platform) => (
-            <MenuItem
-              onClick={() => {
-                onPlatformSelect(platform);
-              }}
-              key={platform.id}
-            >
-              {platform.name}
-            </MenuItem>
-          ))}
-        </MenuList>
-      </Menu>
-    </Box>
+        ))}
+      </MenuList>
+    </Menu>
   );
 };
 

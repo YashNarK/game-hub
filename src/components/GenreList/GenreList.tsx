@@ -102,6 +102,7 @@ const GenreList = ({ onGenreSelect, selectedGenre }: Props) => {
                 <HStack spacing={2}>
                   {" "}
                   <Image
+                    objectFit={"cover"}
                     src={optimizeImage(genre.image_background)}
                     alt="genre-icon"
                     boxSize={"32px"}

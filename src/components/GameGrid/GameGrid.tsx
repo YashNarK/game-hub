@@ -32,7 +32,7 @@ const GameGrid = ({ gameQuery }: Props) => {
         ordering: gameQuery.ordering,
       },
     },
-    [gameQuery.genre, gameQuery.platform, gameQuery.ordering]
+    [gameQuery]
   );
 
   const { colorModeRegular } = useColorModes();

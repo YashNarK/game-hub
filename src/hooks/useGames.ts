@@ -3,7 +3,6 @@ import gameService, { GameData } from "./../services/game-service";
 import useData from "./useData";
 
 const useGames = (requestConfig?: AxiosRequestConfig, deps?: any[]) => {
-  console.log(requestConfig);
   const { data, setData, httpErrors, setHttpErrors, isLoading, setIsLoading } =
     useData<GameData>(gameService, requestConfig, deps);
 

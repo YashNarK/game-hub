@@ -23,13 +23,13 @@ interface Props {
   gameQuery: GameQuery;
 }
 
-const GameGrid = ({
-  gameQuery
-}: Props) => {
+const GameGrid = ({ gameQuery }: Props) => {
   const { games, isLoading, httpErrors } = useGames(
     {
       params: {
-        gameQuery
+        genres: gameQuery.genre?.slug,
+        paltforms: gameQuery.platform?.slug,
+        ordering: gameQuery.ordering,
       },
     },
     [gameQuery.genre, gameQuery.platform, gameQuery.ordering]

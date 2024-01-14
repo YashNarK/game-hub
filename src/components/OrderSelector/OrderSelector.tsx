@@ -6,6 +6,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Text,
 } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 import { toCapitalize } from "../../services/utility";
@@ -38,7 +39,12 @@ const OrderSelector = ({
       <HStack>
         <Menu isLazy>
           <MenuButton as={Button} rightIcon={<FaChevronDown />}>
-            Order by: {selectedOption ? toCapitalize(selectedOption.replace(/-/g, '')) : "None"}
+            Order by:{" "}
+            <Text display={"inline"} fontWeight={"bolder"}>
+              {selectedOption
+                ? toCapitalize(selectedOption.replace(/-/g, ""))
+                : "None"}
+            </Text>
           </MenuButton>
           <MenuList maxH={"8cm"} overflowY={"auto"}>
             <MenuItem
@@ -60,14 +66,16 @@ const OrderSelector = ({
             ))}
           </MenuList>
         </Menu>
-        {selectedOption && <Badge
-          onClick={onAscDescToggle}
-          as={Button}
-          colorScheme="yellow"
-          h={"20px"}
-        >
-          {isAscending ? "ASC" : "DESC"}
-        </Badge>}
+        {selectedOption && (
+          <Badge
+            onClick={onAscDescToggle}
+            as={Button}
+            colorScheme="yellow"
+            h={"20px"}
+          >
+            {isAscending ? "ASC" : "DESC"}
+          </Badge>
+        )}
       </HStack>
     </>
   );

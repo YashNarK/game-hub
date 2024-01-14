@@ -1,4 +1,11 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import {
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+} from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 import usePlatform from "../../hooks/usePlatform";
 import { ParentPlatformData } from "../../services/platfrom-service";
@@ -14,7 +21,10 @@ const PlatformSelector = ({ onPlatformSelect, selectedPlatform }: Props) => {
   return (
     <Menu isLazy>
       <MenuButton as={Button} rightIcon={<FaChevronDown />}>
-        Platforms : {selectedPlatform ? selectedPlatform.name : "All"}
+        Platforms :{" "}
+        <Text display={"inline"} fontWeight={"bolder"}>
+          {selectedPlatform ? selectedPlatform.name : "All"}
+        </Text>
       </MenuButton>
       <MenuList maxH="8cm" overflowY="auto">
         <MenuItem

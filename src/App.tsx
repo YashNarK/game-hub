@@ -1,4 +1,4 @@
-import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
+import { Grid, GridItem, Show, Stack } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
@@ -18,6 +18,8 @@ function App() {
   );
 
   const [isAscending, setIsAscending] = useState(true);
+
+  // Use Refs
 
   // Use Effects
   useEffect(() => {
@@ -66,7 +68,15 @@ function App() {
           </GridItem>
         </Show>
         <GridItem area={"main"}>
-          <HStack gap={10} my={5} px={5}>
+          <Stack
+            direction={{
+              base: "column",
+              md: "row",
+            }}
+            gap={10}
+            my={5}
+            px={5}
+          >
             <OrderSelector
               selectedOption={selectedOrderOption}
               isAscending={isAscending}
@@ -86,7 +96,7 @@ function App() {
               selectedPlatform={selectedPlatform}
               onPlatformSelect={handlePlatformSelect}
             />
-          </HStack>
+          </Stack>
 
           <GameGrid
             selectedPlatform={selectedPlatform}

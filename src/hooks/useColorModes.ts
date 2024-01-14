@@ -1,12 +1,14 @@
 import { useColorModeValue } from "@chakra-ui/react";
 
 const useColorModes = () => {
-  const colorMode = useColorModeValue("gray.800", "white");
-  const reverseColorMode = useColorModeValue("white", "gray.800");
+  const colorModeRegular = useColorModeValue("gray.800", "white");
+  const reverseColorModeRegular = useColorModeValue("white", "gray.800");
 
-  const colorModeDarker = useColorModeValue("teal.600", "gray.500");
-  const reverseColorModeDarker = useColorModeValue( "gray.500","black");
-  return {colorMode, reverseColorMode,colorModeDarker,reverseColorModeDarker};
+  const colorModeLighter = useColorModeValue("teal.600", "gray.500");
+  const reverseColorModeLighter = useColorModeValue("gray.500","teal.600");
+  const colorModeDarker = useColorModeValue("black", "white");
+  const reverseColorModeDarker = useColorModeValue( "white","black");
+  return {colorModeRegular, reverseColorModeRegular,colorModeDarker,reverseColorModeDarker,colorModeLighter,reverseColorModeLighter};
 };
 
 export default useColorModes;

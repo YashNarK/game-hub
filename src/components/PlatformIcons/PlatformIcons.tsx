@@ -31,15 +31,14 @@ const iconMap: { [key: string]: IconType } = {
 };
 
 const PlatformIcons = ({ platforms }: Props) => {
-  const { colorModeDarker } = useColorModes();
+  const { colorModeLighter } = useColorModes();
   return (
     <>
       <HStack>
         {
-          // listOfPlatformSlugs.map((slug,index)=><Icon color={colorModeDarker} key={index} as={iconMap[slug]} />)
           platforms.map(({ platform }) => (
             <Icon
-              color={colorModeDarker}
+              color={colorModeLighter}
               key={platform.id}
               as={iconMap[platform.slug]}
             />

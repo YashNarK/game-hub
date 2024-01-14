@@ -8,9 +8,9 @@ interface Props {
 }
 
 const NavBar = ({ className = "" }: Props) => {
-  const {colorMode,reverseColorMode} = useColorModes();
-  const logoBorderColor = colorMode;
-  const logoBorderColorReverse = reverseColorMode;
+  const {colorModeRegular,reverseColorModeRegular} = useColorModes();
+  const logoBorderColor = colorModeRegular;
+  const logoBorderColorReverse = reverseColorModeRegular;
   return (
     <div className={className}>
       <HStack justifyContent={"space-between"} px={5} py={3}>

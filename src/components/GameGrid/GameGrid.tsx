@@ -39,7 +39,7 @@ const GameGrid = ({
     [selectedGenre, selectedPlatform, selectedOrderBy]
   );
 
-  const { colorMode } = useColorModes();
+  const { colorModeRegular } = useColorModes();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
   return (
     <>
@@ -51,7 +51,7 @@ const GameGrid = ({
       )}
       {!httpErrors && isLoading ? (
         <VStack>
-          <Box color={colorMode} my={5}>
+          <Box color={colorModeRegular} my={5}>
             <Spinner mx={10} size={"xl"} />{" "}
             <Heading
               display={"inline"}

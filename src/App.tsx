@@ -2,43 +2,52 @@ import { Button, Grid, GridItem, Show, Stack } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { GenreData } from "./services/genre-service";
 import PlatformSelector from "./components/PlatformSelector";
 import { ParentPlatformData } from "./services/platfrom-service";
 import OrderSelector from "./components/OrderSelector";
 
+export interface GameQuery {
+  genre: GenreData | null;
+  platform: ParentPlatformData | null;
+  ordering: string | null;
+  isAscending: boolean;
+}
+
 function App() {
   // Use States
-  const [selectedGenre, setSelectedGenre] = useState<GenreData | null>(null);
-  const [selectedPlatform, setSelectedPlatform] =
-    useState<ParentPlatformData | null>(null);
-  const [selectedOrderOption, setSelectedOrderOption] = useState<string | null>(
-    null
-  );
+  // const [selectedGenre, setSelectedGenre] = useState<GenreData | null>(null);
+  // const [selectedPlatform, setSelectedPlatform] =
+  //   useState<ParentPlatformData | null>(null);
+  // const [selectedOrderOption, setSelectedOrderOption] = useState<string | null>(
+  //   null
+  // );
 
-  const [isAscending, setIsAscending] = useState(true);
+  // const [isAscending, setIsAscending] = useState(true);
+
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
   // Use Refs
 
   // Use Effects
-  useEffect(() => {
-    setSelectedOrderOption(selectedOrderOption);
-  }, []);
 
   // handler functions
   const handleGenreSelect = (selectedGenre: GenreData | null) => {
-    setSelectedGenre(selectedGenre);
+    setGameQuery({ ...gameQuery, genre: selectedGenre });
   };
 
   const handlePlatformSelect = (
     selectedPlatform: ParentPlatformData | null
   ) => {
-    setSelectedPlatform(selectedPlatform);
+    setGameQuery({ ...gameQuery, platform: selectedPlatform });
   };
   const handleSortSelect = (selectedSortOption: string | null) => {
-    setSelectedOrderOption(selectedSortOption);
-    setIsAscending(true);
+    setGameQuery({
+      ...gameQuery,
+      ordering: selectedSortOption,
+      isAscending: true,
+    });
   };
 
   return (
@@ -61,7 +70,7 @@ function App() {
         <Show above="md">
           <GridItem area={"aside"} px={3}>
             <GenreList
-              selectedGenre={selectedGenre}
+              selectedGenre={gameQuery.genre}
               onGenreSelect={handleGenreSelect}
             />
           </GridItem>
@@ -77,41 +86,43 @@ function App() {
             px={5}
           >
             <OrderSelector
-              selectedOption={selectedOrderOption}
-              isAscending={isAscending}
+              selectedOption={gameQuery.ordering}
+              isAscending={gameQuery.isAscending}
               onSortOptionSelection={handleSortSelect}
               onAscDescToggle={() => {
-                if (isAscending)
-                  setSelectedOrderOption("-" + selectedOrderOption);
+                let newOrdering: string | null;
+                if (gameQuery.isAscending)
+                  newOrdering = `-${gameQuery.ordering}`;
                 else {
-                  selectedOrderOption?.slice(0, 1) === "-"
-                    ? setSelectedOrderOption(selectedOrderOption?.slice(1))
-                    : null;
+                  newOrdering =
+                    gameQuery.ordering?.slice(0, 1) === "-"
+                      ? gameQuery.ordering?.slice(1)
+                      : null;
                 }
-                setIsAscending(!isAscending);
+                setGameQuery({
+                  ...gameQuery,
+                  isAscending: !gameQuery.isAscending,
+                  ordering: newOrdering,
+                });
               }}
             />
             <PlatformSelector
-              selectedPlatform={selectedPlatform}
+              selectedPlatform={gameQuery.platform}
               onPlatformSelect={handlePlatformSelect}
             />
             <Button
               isDisabled={
-                isAscending === true &&
-                selectedOrderOption === null &&
-                selectedPlatform === null
+                gameQuery.isAscending === true &&
+                gameQuery.ordering === null &&
+                gameQuery.platform === null
               }
               onClick={() => {
-                setIsAscending(true);
-                setSelectedPlatform(null);
-                setSelectedOrderOption(null);
-                console.log(
-                  (
-                    isAscending &&
-                    !selectedOrderOption &&
-                    !selectedPlatform
-                  ).valueOf()
-                );
+                setGameQuery({
+                  ...gameQuery,
+                  isAscending: false,
+                  ordering: null,
+                  platform: null,
+                });
               }}
             >
               Clear
@@ -119,9 +130,9 @@ function App() {
           </Stack>
 
           <GameGrid
-            selectedPlatform={selectedPlatform}
-            selectedGenre={selectedGenre}
-            selectedOrderBy={selectedOrderOption}
+            selectedPlatform={gameQuery.platform}
+            selectedGenre={gameQuery.genre}
+            selectedOrderBy={gameQuery.ordering}
           />
         </GridItem>
       </Grid>

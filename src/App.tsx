@@ -13,19 +13,11 @@ export interface GameQuery {
   platform: ParentPlatformData | null;
   ordering: string | null;
   isAscending: boolean;
+  search: string | undefined;
 }
 
 function App() {
   // Use States
-  // const [selectedGenre, setSelectedGenre] = useState<GenreData | null>(null);
-  // const [selectedPlatform, setSelectedPlatform] =
-  //   useState<ParentPlatformData | null>(null);
-  // const [selectedOrderOption, setSelectedOrderOption] = useState<string | null>(
-  //   null
-  // );
-
-  // const [isAscending, setIsAscending] = useState(true);
-
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
   // Use Refs
@@ -50,6 +42,10 @@ function App() {
     });
   };
 
+  const handleSearch = (searchString: string | undefined) => {
+    setGameQuery({...gameQuery,search:searchString})
+  };
+
   return (
     <>
       <Grid
@@ -65,7 +61,7 @@ function App() {
         }}
       >
         <GridItem area={"nav"}>
-          <NavBar />
+          <NavBar onSearch={handleSearch} />
         </GridItem>
         <Show above="md">
           <GridItem area={"aside"} px={3}>
@@ -129,9 +125,7 @@ function App() {
             </Button>
           </Stack>
 
-          <GameGrid
-            gameQuery={gameQuery}
-          />
+          <GameGrid gameQuery={gameQuery} />
         </GridItem>
       </Grid>
     </>

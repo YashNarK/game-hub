@@ -5,20 +5,32 @@ import useColorModes from "../../hooks/useColorModes";
 import SearchInput from "../SearchInput";
 
 interface Props {
-  className?: string;
+  onSearch: (searchString: string | undefined) => void;
 }
 
-const NavBar = ({ className = "" }: Props) => {
+const NavBar = ({ onSearch}: Props) => {
   const { colorModeRegular, reverseColorModeRegular } = useColorModes();
   const logoBorderColor = colorModeRegular;
   const logoBorderColorReverse = reverseColorModeRegular;
+
+
   return (
-    <div className={className}>
-      <HStack justifyContent={"space-between"} px={5} py={3} spacing={{
-        lg:20,
-        xl:30,
-        '2xl':40
-      }}>
+    <div >
+      <HStack
+        justifyContent={"space-between"}
+        px={{
+          base: 2,
+          md: 5,
+        }}
+        py={3}
+        spacing={{
+          base: 2,
+          md: 5,
+          lg: 20,
+          xl: 30,
+          "2xl": 40,
+        }}
+      >
         <Circle
           size={{
             base: "40px",
@@ -45,7 +57,7 @@ const NavBar = ({ className = "" }: Props) => {
             ></Image>
           </Circle>
         </Circle>
-        <SearchInput />
+        <SearchInput onSearch={onSearch} />
         <ToggleModeButton />
       </HStack>
     </div>

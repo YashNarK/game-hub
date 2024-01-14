@@ -55,15 +55,15 @@ const GameCard = ({
             w={"100%"}
           />
           <Stack mt="6" spacing="3">
-            <Heading noOfLines={2} size={"md"}>
-              {heading}
-            </Heading>
             <Flex justifyContent={"space-between"}>
               <PlatformIcons platforms={parent_platforms} />
               <MetaCriticBadge criticScore={criticScore} />
             </Flex>
 
             <StarRatings ratings={ratings} />
+            <Heading noOfLines={2} size={"md"}>
+              {heading}
+            </Heading>
           </Stack>
         </CardBody>
       </Card>

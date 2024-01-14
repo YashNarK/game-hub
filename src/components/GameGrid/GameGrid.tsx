@@ -14,29 +14,25 @@ import GameCard from "../GameCard";
 import GameCardSkeleton from "../GameCardSkeleton";
 import useColorModes from "../../hooks/useColorModes";
 import optimizeImage from "../../services/image-optimizer";
-import { GenreData } from "../../services/genre-service";
-import { ParentPlatformData } from "../../services/platfrom-service";
+import { GameQuery } from "../../App";
 
 interface Props {
-  selectedGenre: GenreData | null;
-  selectedPlatform: ParentPlatformData | null;
-  selectedOrderBy: string | null;
+  // selectedGenre: GenreData | null;
+  // selectedPlatform: ParentPlatformData | null;
+  // selectedOrderBy: string | null;
+  gameQuery: GameQuery;
 }
 
 const GameGrid = ({
-  selectedOrderBy,
-  selectedGenre,
-  selectedPlatform,
+  gameQuery
 }: Props) => {
   const { games, isLoading, httpErrors } = useGames(
     {
       params: {
-        ordering: selectedOrderBy && selectedOrderBy,
-        genres: selectedGenre?.id,
-        platforms: selectedPlatform?.id,
+        gameQuery
       },
     },
-    [selectedGenre, selectedPlatform, selectedOrderBy]
+    [gameQuery.genre, gameQuery.platform, gameQuery.ordering]
   );
 
   const { colorModeRegular } = useColorModes();

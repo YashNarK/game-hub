@@ -130,9 +130,7 @@ function App() {
           </Stack>
 
           <GameGrid
-            selectedPlatform={gameQuery.platform}
-            selectedGenre={gameQuery.genre}
-            selectedOrderBy={gameQuery.ordering}
+            gameQuery={gameQuery}
           />
         </GridItem>
       </Grid>

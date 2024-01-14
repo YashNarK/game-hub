@@ -1,4 +1,4 @@
-import { Button, useColorMode, Text } from "@chakra-ui/react";
+import { Button, useColorMode, Text, Show } from "@chakra-ui/react";
 import { BsMoonStarsFill } from "react-icons/bs";
 import { ImSun } from "react-icons/im";
 
@@ -11,16 +11,26 @@ const ToggleModeButton = ({ className = "" }: Props) => {
 
   return (
     <div className={className}>
-      <Button variant={'outline'} colorScheme="white" onClick={toggleColorMode}>
+      <Button variant={"outline"} colorScheme="white" onClick={toggleColorMode}>
         {colorMode === "light" ? (
           <>
-            <BsMoonStarsFill  color="black" />
-            <Text mx={2} color={"black"}> Dark Mode</Text>
+            <BsMoonStarsFill color="black" />
+            <Show above="md">
+              <Text mx={2} color={"black"}>
+                {" "}
+                Dark Mode
+              </Text>
+            </Show>
           </>
         ) : (
           <>
             <ImSun color="yellow" />
-            <Text mx={2} color={"yellow"}> Light Mode</Text>
+            <Show above="md">
+              <Text mx={2} color={"yellow"}>
+                {" "}
+                Light Mode
+              </Text>
+            </Show>
           </>
         )}
       </Button>

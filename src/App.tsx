@@ -1,4 +1,4 @@
-import { Grid, GridItem, Show, Stack } from "@chakra-ui/react";
+import { Button, Grid, GridItem, Show, Stack } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
@@ -35,7 +35,6 @@ function App() {
     selectedPlatform: ParentPlatformData | null
   ) => {
     setSelectedPlatform(selectedPlatform);
-    console.log(selectedPlatform);
   };
   const handleSortSelect = (selectedSortOption: string | null) => {
     setSelectedOrderOption(selectedSortOption);
@@ -96,6 +95,27 @@ function App() {
               selectedPlatform={selectedPlatform}
               onPlatformSelect={handlePlatformSelect}
             />
+            <Button
+              isDisabled={
+                isAscending === true &&
+                selectedOrderOption === null &&
+                selectedPlatform === null
+              }
+              onClick={() => {
+                setIsAscending(true);
+                setSelectedPlatform(null);
+                setSelectedOrderOption(null);
+                console.log(
+                  (
+                    isAscending &&
+                    !selectedOrderOption &&
+                    !selectedPlatform
+                  ).valueOf()
+                );
+              }}
+            >
+              Clear
+            </Button>
           </Stack>
 
           <GameGrid

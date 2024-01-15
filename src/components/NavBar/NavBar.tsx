@@ -6,9 +6,10 @@ import SearchInput from "../SearchInput";
 
 interface Props {
   onSearch: (searchString: string | undefined) => void;
+  onTyping: (serachString: string | undefined) => void;
 }
 
-const NavBar = ({ onSearch}: Props) => {
+const NavBar = ({onTyping, onSearch}: Props) => {
   const { colorModeRegular, reverseColorModeRegular } = useColorModes();
   const logoBorderColor = colorModeRegular;
   const logoBorderColorReverse = reverseColorModeRegular;
@@ -57,7 +58,7 @@ const NavBar = ({ onSearch}: Props) => {
             ></Image>
           </Circle>
         </Circle>
-        <SearchInput onSearch={onSearch} />
+        <SearchInput onTyping={onTyping} onSearch={onSearch} />
         <ToggleModeButton />
       </HStack>
     </div>

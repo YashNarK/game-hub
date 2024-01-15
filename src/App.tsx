@@ -48,6 +48,10 @@ function App() {
     setGameQuery({ ...gameQuery, search: searchString });
   };
 
+  const handleTyping = (searchString: string | undefined) => {
+    if(!searchString)setGameQuery({ ...gameQuery, search: searchString });
+  };
+
   return (
     <>
       <Grid
@@ -63,7 +67,7 @@ function App() {
         }}
       >
         <GridItem area={"nav"}>
-          <NavBar onSearch={handleSearch} />
+          <NavBar onTyping={handleTyping} onSearch={handleSearch} />
         </GridItem>
         <Show above="md">
           <GridItem area={"aside"} px={3}>

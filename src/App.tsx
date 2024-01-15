@@ -8,6 +8,7 @@ import PlatformSelector from "./components/PlatformSelector";
 import { ParentPlatformData } from "./services/platfrom-service";
 import OrderSelector from "./components/OrderSelector";
 import Gameheading from "./components/GameHeading";
+import Footer from "./components/Footer";
 
 export interface GameQuery {
   genre: GenreData | null;
@@ -44,15 +45,15 @@ function App() {
   };
 
   const handleSearch = (searchString: string | undefined) => {
-    setGameQuery({...gameQuery,search:searchString})
+    setGameQuery({ ...gameQuery, search: searchString });
   };
 
   return (
     <>
       <Grid
         templateAreas={{
-          base: `"nav nav" "main main"`,
-          md: `"nav nav" "aside main"`,
+          base: `"nav nav" "main main" "footer footer"`,
+          md: `"nav nav" "aside main" "footer footer"`,
         }}
         gridTemplateColumns={{
           base: "180px 1fr",
@@ -125,9 +126,15 @@ function App() {
               Clear
             </Button>
           </Stack>
-          <Box m={4}><Gameheading gameQuery={gameQuery}/></Box>
+          <Box m={4}>
+            <Gameheading gameQuery={gameQuery} />
+          </Box>
 
           <GameGrid gameQuery={gameQuery} />
+        </GridItem>
+
+        <GridItem area="footer">
+          <Footer />
         </GridItem>
       </Grid>
     </>

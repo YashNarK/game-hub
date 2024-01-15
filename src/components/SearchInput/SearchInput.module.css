@@ -1,0 +1,7 @@
+.closeIcon {
+  cursor: pointer;
+}
+
+.closeIcon:hover {
+  font-size: larger;
+}

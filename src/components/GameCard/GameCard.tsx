@@ -29,13 +29,13 @@ const GameCard = ({
         as={"a"}
         href={gameUrl}
         target="_blank"
-        w={{
-          base: "300px",
-          md: "230px",
-          lg: "250px",
-          xl: "280px",
-          "2xl": "300px",
-        }}
+        // w={{
+        //   base: "300px",
+        //   md: "230px",
+        //   lg: "250px",
+        //   xl: "280px",
+        //   "2xl": "300px",
+        // }}
         boxShadow={"2xl"}
         h={{
           base: "440px",

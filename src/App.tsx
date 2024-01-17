@@ -77,7 +77,7 @@ function App() {
             />
           </GridItem>
         </Show>
-        <GridItem area={"main"}>
+        <GridItem area={"main"} px={5}>
           <Stack
             direction={{
               base: "column",

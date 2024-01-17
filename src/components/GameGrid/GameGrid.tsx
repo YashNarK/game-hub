@@ -48,12 +48,13 @@ const GameGrid = ({ gameQuery }: Props) => {
       )}
       {!httpErrors && isLoading ? (
         <VStack>
-          <Box color={colorModeRegular} my={5}>
-            <Spinner mx={10} size={"xl"} />{" "}
+          <Box color={colorModeRegular}>
+            <Spinner size={"xl"} />{" "}
             <Heading
               display={"inline"}
               fontSize={{
-                base: "xl",
+                base: "sm",
+                sm: "lg",
                 md: "2xl",
               }}
             >
@@ -64,7 +65,7 @@ const GameGrid = ({ gameQuery }: Props) => {
             columns={{
               base: 1,
               md: 2,
-              lg: 2,
+              lg: 3,
               xl: 3,
               "2xl": 4,
             }}

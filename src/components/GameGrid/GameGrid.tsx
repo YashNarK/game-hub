@@ -37,7 +37,7 @@ const GameGrid = ({ gameQuery }: Props) => {
   );
 
   const { colorModeRegular } = useColorModes();
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
   return (
     <>
       {httpErrors && (
@@ -66,8 +66,8 @@ const GameGrid = ({ gameQuery }: Props) => {
               base: 1,
               md: 2,
               lg: 3,
-              xl: 3,
-              "2xl": 4,
+              xl: 4,
+              "2xl": 5,
             }}
             spacing={6}
           >

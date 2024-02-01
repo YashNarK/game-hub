@@ -81,9 +81,9 @@ const GameGrid = ({ gameQuery }: Props) => {
           columns={{
             base: 1,
             md: 2,
-            lg: 2,
-            xl: 3,
-            "2xl": 4,
+            lg: 3,
+            xl: 4,
+            "2xl": 5,
           }}
           spacing={6}
         >

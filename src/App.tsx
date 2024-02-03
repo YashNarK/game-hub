@@ -52,6 +52,10 @@ function App() {
     if(!searchString)setGameQuery({ ...gameQuery, search: searchString });
   };
 
+  console.log(gameQuery.isAscending,
+    gameQuery.ordering,
+    gameQuery.platform)
+
   return (
     <>
       <Grid
@@ -114,9 +118,9 @@ function App() {
             />
             <Button
               isDisabled={
-                gameQuery.isAscending === true &&
-                gameQuery.ordering === null &&
-                gameQuery.platform === null
+                (gameQuery.isAscending === undefined || gameQuery.isAscending === false) &&
+                (gameQuery.ordering === undefined || gameQuery.ordering === null) &&
+                (gameQuery.platform === undefined || gameQuery.platform === null)
               }
               onClick={() => {
                 setGameQuery({

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { AxiosError } from "../services/api-client";
+import { AxiosError, CanceledError, AxiosRequestConfig } from "../services/api-client";
 import { HttpService } from "../services/http-service";
-import { AxiosRequestConfig } from "axios";
 
 interface ResponseData<T> {
   count: number;
@@ -33,6 +32,7 @@ const useData = <T>(
           setData(DataList);
           setHttpErrors("");
         } catch (error) {
+          if (error instanceof CanceledError) return;
           const err = error as AxiosError;
           setHttpErrors(err.message);
         } finally {

@@ -16,7 +16,7 @@ interface Props {
 }
 
 const PlatformSelector = ({ onPlatformSelect, selectedPlatform }: Props) => {
-  const { platforms } = usePlatform(undefined,["platform"]);
+  const { platforms } = usePlatform();
 
   return (
     <Menu isLazy>

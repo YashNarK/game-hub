@@ -16,6 +16,8 @@ export interface GameQuery {
   ordering: string | null;
   isAscending: boolean;
   search: string | undefined;
+  platformName: string | undefined;
+  genreName: string | undefined;
 }
 
 function App() {
@@ -28,13 +30,13 @@ function App() {
 
   // handler functions
   const handleGenreSelect = (selectedGenre: GenreData | null) => {
-    setGameQuery({ ...gameQuery, genre: selectedGenre });
+    setGameQuery({ ...gameQuery, genreName: selectedGenre?.slug });
   };
 
   const handlePlatformSelect = (
     selectedPlatform: ParentPlatformData | null
   ) => {
-    setGameQuery({ ...gameQuery, platform: selectedPlatform });
+    setGameQuery({ ...gameQuery, platformName: selectedPlatform?.slug });
   };
   const handleSortSelect = (selectedSortOption: string | null) => {
     setGameQuery({
@@ -49,10 +51,8 @@ function App() {
   };
 
   const handleTyping = (searchString: string | undefined) => {
-    if(!searchString)setGameQuery({ ...gameQuery, search: searchString });
+    if (!searchString) setGameQuery({ ...gameQuery, search: searchString });
   };
-
-
 
   return (
     <>
@@ -116,9 +116,12 @@ function App() {
             />
             <Button
               isDisabled={
-                (gameQuery.isAscending === undefined || gameQuery.isAscending === false) &&
-                (gameQuery.ordering === undefined || gameQuery.ordering === null) &&
-                (gameQuery.platform === undefined || gameQuery.platform === null)
+                (gameQuery.isAscending === undefined ||
+                  gameQuery.isAscending === false) &&
+                (gameQuery.ordering === undefined ||
+                  gameQuery.ordering === null) &&
+                (gameQuery.platform === undefined ||
+                  gameQuery.platform === null)
               }
               onClick={() => {
                 setGameQuery({

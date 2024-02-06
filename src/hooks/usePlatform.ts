@@ -8,7 +8,7 @@ const usePlatform = (requestConfig?: AxiosRequestConfig, deps?: any[]) => {
   const { data, httpErrors, isLoading } = useData<ParentPlatformData>(
     platfromService,
     requestConfig,
-    deps
+    deps || ["platforms"]
   );
   return {
     platforms: data,

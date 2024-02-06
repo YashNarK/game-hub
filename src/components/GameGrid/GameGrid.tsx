@@ -87,7 +87,7 @@ const GameGrid = ({ gameQuery }: Props) => {
           }}
           spacing={6}
         >
-          {games.map((game, index) => {
+          {games?.map((game, index) => {
             return (
               <GridItem key={index} m={"auto"}>
                 <GameCard

@@ -52,9 +52,7 @@ function App() {
     if(!searchString)setGameQuery({ ...gameQuery, search: searchString });
   };
 
-  console.log(gameQuery.isAscending,
-    gameQuery.ordering,
-    gameQuery.platform)
+
 
   return (
     <>

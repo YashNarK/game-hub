@@ -97,7 +97,7 @@ const GenreList = ({ onGenreSelect, selectedGenre }: Props) => {
                 underLineGenre(highlightProps.color, highlightProps.height)) ||
                 (!selectedGenre && underLineGenre())}
             </ListItem>
-            {genres.map((genre) => (
+            {genres?.map((genre) => (
               <ListItem key={genre.id} py={1}>
                 <HStack spacing={2}>
                   {" "}

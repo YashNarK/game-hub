@@ -4,15 +4,12 @@ import genreService, {
 import useData from "./useData";
 
 const useGenres = () => {
-  const {data,setData, httpErrors,setHttpErrors,isLoading,setIsLoading} = useData<GenreData>(genreService);
+  const {data, httpErrors,isLoading} = useData<GenreData>(genreService,undefined,["genre"]);
 
   return {
     genres:data,
     httpErrors,
     isLoading,
-    setGenres:setData,
-    setHttpErrors,
-    setIsLoading,
   };
 };
 

@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-
-import { AxiosError, CanceledError, AxiosRequestConfig } from "../services/api-client";
+import { useQuery } from "@tanstack/react-query";
+import { AxiosError, AxiosRequestConfig } from "../services/api-client";
 import { HttpService } from "../services/http-service";
 
 interface ResponseData<T> {
@@ -13,47 +12,23 @@ const useData = <T>(
   requestConfig?: AxiosRequestConfig,
   deps?: any[]
 ) => {
-  const [data, setData] = useState<T[]>([]);
-  const [httpErrors, setHttpErrors] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const queryKey = deps || ["data"];
+  const queryFn = async () => {
+    const { resp } = await ServiceObject.get<ResponseData<T>>(requestConfig);
+    return resp.data.results;
+  };
+  const staleTime = 1000 * 60 * 10; // The data will remain fresh until 10 mins
 
-  useEffect(
-    () => {
-      let controllerAbort: () => void;
-
-      const fetchData = async () => {
-        try {
-          setIsLoading(true);
-          const { resp, cancel } = await ServiceObject.get<ResponseData<T>>(
-            requestConfig
-          );
-          controllerAbort = cancel;
-          const DataList = resp.data.results;
-          setData(DataList);
-          setHttpErrors("");
-        } catch (error) {
-          if (error instanceof CanceledError) return;
-          const err = error as AxiosError;
-          setHttpErrors(err.message);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
-      fetchData();
-
-      return () => controllerAbort && controllerAbort();
-    },
-    deps ? [...deps] : []
-  );
+  const { data, error, isLoading, isFetching } = useQuery<T[], AxiosError>({
+    queryKey,
+    queryFn,
+    staleTime,
+  });
 
   return {
     data,
-    httpErrors,
-    isLoading,
-    setData,
-    setHttpErrors,
-    setIsLoading,
+    httpErrors: error?.message,
+    isLoading: isLoading || isFetching,
   };
 };
 

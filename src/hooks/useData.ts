@@ -18,11 +18,13 @@ const useData = <T>(
     return resp.data.results;
   };
   const staleTime = 1000 * 60 * 10; // The data will remain fresh until 10 mins
+  const gcTime = 1000 * 60 * 10;
 
   const { data, error, isLoading, isFetching } = useQuery<T[], AxiosError>({
     queryKey,
     queryFn,
     staleTime,
+    gcTime,
   });
 
   return {

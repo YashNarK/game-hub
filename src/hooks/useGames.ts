@@ -6,7 +6,7 @@ const useGames = (requestConfig?: AxiosRequestConfig, deps?: any[]) => {
   const { data, httpErrors, isLoading } = useData<GameData>(
     gameService,
     requestConfig,
-    deps
+    Object.keys(deps![0]).length > 0? deps : ["games"]
   );
 
   return {

@@ -15,25 +15,27 @@ import GameCardSkeleton from "../GameCardSkeleton";
 import useColorModes from "../../hooks/useColorModes";
 import optimizeImage from "../../services/image-optimizer";
 import { GameQuery } from "../../App";
+import Pagination from "../Pagination";
 
 interface Props {
-  // selectedGenre: GenreData | null;
-  // selectedPlatform: ParentPlatformData | null;
-  // selectedOrderBy: string | null;
   gameQuery: GameQuery;
+  pageNumber: number;
+  onNext: () => void;
+  onPrev: () => void;
 }
 
-const GameGrid = ({ gameQuery }: Props) => {
-  const { games, isLoading, httpErrors } = useGames(
+const GameGrid = ({ gameQuery, pageNumber, onNext, onPrev }: Props) => {
+  const { games, isLoading, httpErrors, nextPage, prevPage } = useGames(
     {
       params: {
-        genres: gameQuery.genre?.slug,
-        paltforms: gameQuery.platform?.slug,
+        genres: gameQuery.genreName,
+        platforms: gameQuery.platform?.id,
         ordering: gameQuery.ordering,
         search: gameQuery.search,
+        page: gameQuery.page,
       },
     },
-    [gameQuery]
+    [{...gameQuery,platform:null,genre:null}]
   );
 
   const { colorModeRegular } = useColorModes();
@@ -104,6 +106,14 @@ const GameGrid = ({ gameQuery }: Props) => {
           })}
         </SimpleGrid>
       )}
+
+      <Pagination
+        hasNext={Boolean(nextPage)}
+        hasPrev={Boolean(prevPage)}
+        pageNumber={pageNumber}
+        onNext={onNext}
+        onPrev={onPrev}
+      />
     </>
   );
 };

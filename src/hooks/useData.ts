@@ -5,6 +5,8 @@ import { HttpService } from "../services/http-service";
 interface ResponseData<T> {
   count: number;
   results: T[];
+  next: string | null;
+  previous: string | null;
 }
 
 const useData = <T>(
@@ -13,14 +15,17 @@ const useData = <T>(
   deps?: any[]
 ) => {
   const queryKey = deps || ["data"];
+
   const queryFn = async () => {
     const { resp } = await ServiceObject.get<ResponseData<T>>(requestConfig);
-    return resp.data.results;
+
+    return resp.data;
   };
   const staleTime = 1000 * 60 * 10; // The data will remain fresh until 10 mins
   const gcTime = 1000 * 60 * 10;
+  const placeholderData =  (prevData: ResponseData<T>) => prevData || []
 
-  const { data, error, isLoading, isFetching } = useQuery<T[], AxiosError>({
+  const { data, error, isLoading, isFetching } = useQuery<ResponseData<T>, AxiosError>({
     queryKey,
     queryFn,
     staleTime,
@@ -28,9 +33,12 @@ const useData = <T>(
   });
 
   return {
-    data,
+    data: data?.results,
     httpErrors: error?.message,
     isLoading: isLoading || isFetching,
+    nextPage: data?.next,
+    prevPage: data?.previous,
+    placeholderData
   };
 };
 

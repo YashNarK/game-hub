@@ -18,11 +18,16 @@ export interface GameQuery {
   search: string | undefined;
   platformName: string | undefined;
   genreName: string | undefined;
+  page: number;
 }
 
 function App() {
   // Use States
-  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const [gameQuery, setGameQuery] = useState<GameQuery>({
+    page: pageNumber,
+  } as GameQuery);
 
   // Use Refs
 
@@ -30,13 +35,25 @@ function App() {
 
   // handler functions
   const handleGenreSelect = (selectedGenre: GenreData | null) => {
-    setGameQuery({ ...gameQuery, genreName: selectedGenre?.slug });
+    setGameQuery({
+      ...gameQuery,
+      genreName: selectedGenre?.slug,
+      genre: selectedGenre,
+      page: 1,
+    });
+    setPageNumber(1);
   };
 
   const handlePlatformSelect = (
     selectedPlatform: ParentPlatformData | null
   ) => {
-    setGameQuery({ ...gameQuery, platformName: selectedPlatform?.slug });
+    setGameQuery({
+      ...gameQuery,
+      platformName: selectedPlatform?.slug,
+      platform: selectedPlatform,
+      page: 1,
+    });
+    setPageNumber(1);
   };
   const handleSortSelect = (selectedSortOption: string | null) => {
     setGameQuery({
@@ -47,12 +64,27 @@ function App() {
   };
 
   const handleSearch = (searchString: string | undefined) => {
-    setGameQuery({ ...gameQuery, search: searchString });
+    setGameQuery({ ...gameQuery, search: searchString, page: 1 });
+    setPageNumber(1);
   };
 
   const handleTyping = (searchString: string | undefined) => {
-    if (!searchString) setGameQuery({ ...gameQuery, search: searchString });
+    if (!searchString) {
+      setGameQuery({ ...gameQuery, search: searchString, page: 1 });
+      setPageNumber(1);
+    }
   };
+
+  const handleNextPage = () => {
+    setPageNumber(pageNumber + 1);
+    setGameQuery({ ...gameQuery, page: gameQuery.page + 1 });
+  };
+  const handlePrevPage = () => {
+    setPageNumber(pageNumber - 1);
+    setGameQuery({ ...gameQuery, page: gameQuery.page - 1 });
+  };
+
+  // Component TSX markup
 
   return (
     <>
@@ -129,7 +161,10 @@ function App() {
                   isAscending: false,
                   ordering: null,
                   platform: null,
+                  platformName: undefined,
+                  page: 1,
                 });
+                setPageNumber(1);
               }}
             >
               Clear
@@ -139,7 +174,12 @@ function App() {
             <Gameheading gameQuery={gameQuery} />
           </Box>
 
-          <GameGrid gameQuery={gameQuery} />
+          <GameGrid
+            gameQuery={gameQuery}
+            pageNumber={pageNumber}
+            onNext={handleNextPage}
+            onPrev={handlePrevPage}
+          />
         </GridItem>
 
         <GridItem area="footer">

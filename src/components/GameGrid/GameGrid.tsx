@@ -42,8 +42,7 @@ const GameGrid = ({ gameQuery, setPage }: Props) => {
   // Update page information when next/prev pages change
   useEffect(() => {
     setPage(nextPage, prevPage);
-  }, [nextPage, prevPage, setPage]);
-
+  }, [nextPage,prevPage]);
   const { colorModeRegular } = useColorModes();
   const skeletons = Array.from({ length: 13 }, (_, i) => i + 1);
   return (

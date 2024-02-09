@@ -49,7 +49,7 @@ function App() {
       page: 1,
     });
     setPageNumber(1);
-  }
+  };
 
   const handleGenreSelect = (selectedGenre: GenreData | null) => {
     setGameQuery({
@@ -172,9 +172,9 @@ function App() {
                 />
                 <ClearButton
                   isDisabled={
-                    (gameQuery.isAscending === undefined ) &&
-                    (gameQuery.ordering === undefined ) &&
-                    (gameQuery.platform === undefined )
+                    gameQuery.isAscending === undefined &&
+                    gameQuery.ordering === undefined &&
+                    gameQuery.platform === undefined
                   }
                   onClick={handleClear}
                 />
@@ -186,14 +186,23 @@ function App() {
           </Box>
         </GridItem>
         <Show above="md">
-          <GridItem area={"aside"} px={3}>
+          <GridItem
+            area={"aside"}
+            px={3}
+            position="sticky"
+            left="0"
+            top="200"
+            height="100vh" // Adjust the height as needed
+            overflowY="auto" // Enable vertical scrolling for the GenreList
+            zIndex="99" // Ensure it's behind the NavBar
+          >
             <GenreList
               selectedGenre={gameQuery.genre}
               onGenreSelect={handleGenreSelect}
             />
           </GridItem>
         </Show>
-        <GridItem area={"main"} px={5}>
+        <GridItem area={"main"} px={5} overflowY="auto">
           <GameGrid
             gameQuery={gameQuery}
             pageNumber={pageNumber}

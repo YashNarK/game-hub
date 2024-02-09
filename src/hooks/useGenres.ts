@@ -7,7 +7,7 @@ const useGenres = (requestConfig?: AxiosRequestConfig, deps?: any[]) => {
     genreService,
     requestConfig,
     deps || ["genres"],
-    1000*60*60*24*7
+    1000*60*60*24*1
   );
 
   return {

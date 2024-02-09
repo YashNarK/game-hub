@@ -14,8 +14,8 @@ import GameCard from "../GameCard";
 import GameCardSkeleton from "../GameCardSkeleton";
 import useColorModes from "../../hooks/useColorModes";
 import optimizeImage from "../../services/image-optimizer";
-import { GameQuery } from "../../App";
 import { useEffect } from "react";
+import { GameQuery } from "../../interfaces/game.type";
 
 interface Props {
   gameQuery: GameQuery;

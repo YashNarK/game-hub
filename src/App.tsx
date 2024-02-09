@@ -12,22 +12,10 @@ import ClearButton from "./components/ClearButton";
 import Pagination from "./components/Pagination";
 import { GenreData } from "./interfaces/genre.type";
 import { ParentPlatformData } from "./interfaces/platform.type";
+import { GameQuery } from "./interfaces/game.type";
+import { Page } from "./interfaces/page.type";
 
-export interface GameQuery {
-  genre?: GenreData | null | undefined;
-  platform?: ParentPlatformData | null | undefined;
-  ordering: string | null | undefined;
-  isAscending: boolean | undefined;
-  search: string | undefined;
-  platformName: string | undefined;
-  genreName: string | undefined;
-  page: number;
-}
 
-interface Page {
-  hasNextPage: boolean;
-  hasPrevPage: boolean;
-}
 
 function App() {
   // Use States

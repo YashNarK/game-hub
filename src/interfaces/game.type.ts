@@ -1,5 +1,5 @@
 import { GenreData } from "./genre.type";
-import { PlatformData } from "./platform.type";
+import { ParentPlatformData, PlatformData } from "./platform.type";
 
 export interface GameData {
     id: number;
@@ -12,3 +12,15 @@ export interface GameData {
     metacritic:number;
     genres:GenreData[]
   }
+
+  export interface GameQuery {
+    genre?: GenreData | null | undefined;
+    platform?: ParentPlatformData | null | undefined;
+    ordering: string | null | undefined;
+    isAscending: boolean | undefined;
+    search: string | undefined;
+    platformName: string | undefined;
+    genreName: string | undefined;
+    page: number;
+  }
+  

@@ -11,6 +11,7 @@ import Gameheading from "./components/GameHeading";
 import Footer from "./components/Footer";
 import useColorModes from "./hooks/useColorModes";
 import ClearButton from "./components/ClearButton";
+import Pagination from "./components/Pagination";
 
 export interface GameQuery {
   genre?: GenreData | null | undefined;
@@ -23,9 +24,18 @@ export interface GameQuery {
   page: number;
 }
 
+interface Page {
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}
+
 function App() {
   // Use States
   const [pageNumber, setPageNumber] = useState(1);
+  const [page, setPage] = useState<Page>({
+    hasNextPage: false,
+    hasPrevPage: false,
+  });
 
   const [gameQuery, setGameQuery] = useState<GameQuery>({
     page: pageNumber,
@@ -38,6 +48,12 @@ function App() {
   // Use Effects
 
   // handler functions
+  const onSetPage = (nextPage: string | null | undefined, prevPage : string | null | undefined) => {
+    setPage({
+      hasNextPage:Boolean(nextPage),
+      hasPrevPage:Boolean(prevPage)
+    })
+  }
 
   const handleClear = () => {
     setGameQuery({
@@ -205,6 +221,12 @@ function App() {
         <GridItem area={"main"} px={5} overflowY="auto">
           <GameGrid
             gameQuery={gameQuery}
+            setPage = {onSetPage}
+          />
+          <Pagination
+            
+            hasNext={Boolean(page.hasNextPage)}
+            hasPrev={Boolean(page.hasPrevPage)}
             pageNumber={pageNumber}
             onNext={handleNextPage}
             onPrev={handlePrevPage}

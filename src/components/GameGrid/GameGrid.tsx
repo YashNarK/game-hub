@@ -15,16 +15,17 @@ import GameCardSkeleton from "../GameCardSkeleton";
 import useColorModes from "../../hooks/useColorModes";
 import optimizeImage from "../../services/image-optimizer";
 import { GameQuery } from "../../App";
-import Pagination from "../Pagination";
+import { useEffect } from "react";
 
 interface Props {
   gameQuery: GameQuery;
-  pageNumber: number;
-  onNext: () => void;
-  onPrev: () => void;
+  setPage: (
+    nextPage: string | null | undefined,
+    prevPage: string | null | undefined
+  ) => void;
 }
 
-const GameGrid = ({ gameQuery, pageNumber, onNext, onPrev }: Props) => {
+const GameGrid = ({ gameQuery, setPage }: Props) => {
   const { games, isLoading, httpErrors, nextPage, prevPage } = useGames(
     {
       params: {
@@ -35,11 +36,16 @@ const GameGrid = ({ gameQuery, pageNumber, onNext, onPrev }: Props) => {
         page: gameQuery.page,
       },
     },
-    [{...gameQuery,platform:undefined,genre:undefined}]
+    [{ ...gameQuery, platform: undefined, genre: undefined }]
   );
 
+  // Update page information when next/prev pages change
+  useEffect(() => {
+    setPage(nextPage, prevPage);
+  }, [nextPage, prevPage, setPage]);
+
   const { colorModeRegular } = useColorModes();
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+  const skeletons = Array.from({ length: 13 }, (_, i) => i + 1);
   return (
     <>
       {httpErrors && (
@@ -106,14 +112,6 @@ const GameGrid = ({ gameQuery, pageNumber, onNext, onPrev }: Props) => {
           })}
         </SimpleGrid>
       )}
-
-      <Pagination
-        hasNext={Boolean(nextPage)}
-        hasPrev={Boolean(prevPage)}
-        pageNumber={pageNumber}
-        onNext={onNext}
-        onPrev={onPrev}
-      />
     </>
   );
 };

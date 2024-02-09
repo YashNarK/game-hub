@@ -102,6 +102,77 @@ function App() {
       >
         <GridItem area={"nav"}>
           <NavBar onTyping={handleTyping} onSearch={handleSearch} />
+
+          <Box>
+            <Stack
+              display={"flex"}
+              justifyContent={"space-between"}
+              w={{
+                base: "100%",
+                md: "50%",
+              }}
+              direction={{
+                base: "column",
+                md: "row",
+              }}
+              gap={10}
+              mx={'auto'}
+              my={5}
+              px={5}
+            >
+              <OrderSelector
+                selectedOption={gameQuery.ordering}
+                isAscending={gameQuery.isAscending}
+                onSortOptionSelection={handleSortSelect}
+                onAscDescToggle={() => {
+                  let newOrdering: string | null;
+                  if (gameQuery.isAscending)
+                    newOrdering = `-${gameQuery.ordering}`;
+                  else {
+                    newOrdering =
+                      gameQuery.ordering?.slice(0, 1) === "-"
+                        ? gameQuery.ordering?.slice(1)
+                        : null;
+                  }
+                  setGameQuery({
+                    ...gameQuery,
+                    isAscending: !gameQuery.isAscending,
+                    ordering: newOrdering,
+                  });
+                }}
+              />
+              <PlatformSelector
+                selectedPlatform={gameQuery.platform}
+                onPlatformSelect={handlePlatformSelect}
+              />
+              <Button
+                isDisabled={
+                  (gameQuery.isAscending === undefined ||
+                    gameQuery.isAscending === false) &&
+                  (gameQuery.ordering === undefined ||
+                    gameQuery.ordering === null) &&
+                  (gameQuery.platform === undefined ||
+                    gameQuery.platform === null)
+                }
+                onClick={() => {
+                  setGameQuery({
+                    ...gameQuery,
+                    isAscending: false,
+                    ordering: null,
+                    platform: null,
+                    platformName: undefined,
+                    page: 1,
+                  });
+                  setPageNumber(1);
+                }}
+              >
+                Clear
+              </Button>
+            </Stack>
+            <Box m={4} textAlign={'center'}>
+              <Gameheading gameQuery={gameQuery} />
+            </Box>
+          </Box>
         </GridItem>
         <Show above="md">
           <GridItem area={"aside"} px={3}>
@@ -112,68 +183,6 @@ function App() {
           </GridItem>
         </Show>
         <GridItem area={"main"} px={5}>
-          <Stack
-            direction={{
-              base: "column",
-              md: "row",
-            }}
-            gap={10}
-            my={5}
-            px={5}
-          >
-            <OrderSelector
-              selectedOption={gameQuery.ordering}
-              isAscending={gameQuery.isAscending}
-              onSortOptionSelection={handleSortSelect}
-              onAscDescToggle={() => {
-                let newOrdering: string | null;
-                if (gameQuery.isAscending)
-                  newOrdering = `-${gameQuery.ordering}`;
-                else {
-                  newOrdering =
-                    gameQuery.ordering?.slice(0, 1) === "-"
-                      ? gameQuery.ordering?.slice(1)
-                      : null;
-                }
-                setGameQuery({
-                  ...gameQuery,
-                  isAscending: !gameQuery.isAscending,
-                  ordering: newOrdering,
-                });
-              }}
-            />
-            <PlatformSelector
-              selectedPlatform={gameQuery.platform}
-              onPlatformSelect={handlePlatformSelect}
-            />
-            <Button
-              isDisabled={
-                (gameQuery.isAscending === undefined ||
-                  gameQuery.isAscending === false) &&
-                (gameQuery.ordering === undefined ||
-                  gameQuery.ordering === null) &&
-                (gameQuery.platform === undefined ||
-                  gameQuery.platform === null)
-              }
-              onClick={() => {
-                setGameQuery({
-                  ...gameQuery,
-                  isAscending: false,
-                  ordering: null,
-                  platform: null,
-                  platformName: undefined,
-                  page: 1,
-                });
-                setPageNumber(1);
-              }}
-            >
-              Clear
-            </Button>
-          </Stack>
-          <Box m={4}>
-            <Gameheading gameQuery={gameQuery} />
-          </Box>
-
           <GameGrid
             gameQuery={gameQuery}
             pageNumber={pageNumber}

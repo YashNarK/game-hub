@@ -1,4 +1,4 @@
-import { Box, Button, Grid, GridItem, Show, Stack } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Show, Stack } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
@@ -10,12 +10,13 @@ import OrderSelector from "./components/OrderSelector";
 import Gameheading from "./components/GameHeading";
 import Footer from "./components/Footer";
 import useColorModes from "./hooks/useColorModes";
+import ClearButton from "./components/ClearButton";
 
 export interface GameQuery {
   genre?: GenreData | null | undefined;
   platform?: ParentPlatformData | null | undefined;
-  ordering: string | null;
-  isAscending: boolean;
+  ordering: string | null | undefined;
+  isAscending: boolean | undefined;
   search: string | undefined;
   platformName: string | undefined;
   genreName: string | undefined;
@@ -37,6 +38,19 @@ function App() {
   // Use Effects
 
   // handler functions
+
+  const handleClear = () => {
+    setGameQuery({
+      ...gameQuery,
+      isAscending: undefined,
+      ordering: undefined,
+      platform: undefined,
+      platformName: undefined,
+      page: 1,
+    });
+    setPageNumber(1);
+  }
+
   const handleGenreSelect = (selectedGenre: GenreData | null) => {
     setGameQuery({
       ...gameQuery,
@@ -156,31 +170,14 @@ function App() {
                   selectedPlatform={gameQuery.platform}
                   onPlatformSelect={handlePlatformSelect}
                 />
-                <Button
-                  variant={"ghost"}
-                  ms={2}
+                <ClearButton
                   isDisabled={
-                    (gameQuery.isAscending === undefined ||
-                      gameQuery.isAscending === false) &&
-                    (gameQuery.ordering === undefined ||
-                      gameQuery.ordering === null) &&
-                    (gameQuery.platform === undefined ||
-                      gameQuery.platform === null)
+                    (gameQuery.isAscending === undefined ) &&
+                    (gameQuery.ordering === undefined ) &&
+                    (gameQuery.platform === undefined )
                   }
-                  onClick={() => {
-                    setGameQuery({
-                      ...gameQuery,
-                      isAscending: false,
-                      ordering: null,
-                      platform: null,
-                      platformName: undefined,
-                      page: 1,
-                    });
-                    setPageNumber(1);
-                  }}
-                >
-                  Clear
-                </Button>
+                  onClick={handleClear}
+                />
               </Box>
             </Stack>
             <Box m={4} textAlign={"center"}>

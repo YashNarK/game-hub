@@ -14,8 +14,8 @@ import { toCapitalize } from "../../services/utility";
 interface Props {
   onSortOptionSelection: (selectedOption: string | null) => void;
   onAscDescToggle: () => void;
-  selectedOption: string | null;
-  isAscending: boolean;
+  selectedOption: string | null | undefined;
+  isAscending: boolean | undefined;
 }
 
 const OrderSelector = ({

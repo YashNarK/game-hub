@@ -15,8 +15,6 @@ import { ParentPlatformData } from "./interfaces/platform.type";
 import { GameQuery } from "./interfaces/game.type";
 import { Page } from "./interfaces/page.type";
 
-
-
 function App() {
   // Use States
   const [pageNumber, setPageNumber] = useState(1);
@@ -36,12 +34,15 @@ function App() {
   // Use Effects
 
   // handler functions
-  const onSetPage = (nextPage: string | null | undefined, prevPage : string | null | undefined) => {
+  const onSetPage = (
+    nextPage: string | null | undefined,
+    prevPage: string | null | undefined
+  ) => {
     setPage({
-      hasNextPage:Boolean(nextPage),
-      hasPrevPage:Boolean(prevPage)
-    })
-  }
+      hasNextPage: Boolean(nextPage),
+      hasPrevPage: Boolean(prevPage),
+    });
+  };
 
   const handleClear = () => {
     setGameQuery({
@@ -137,7 +138,10 @@ function App() {
               justifyContent={"space-between"}
               w={{
                 base: "100%",
-                md: "80%",
+                md: "95%",
+                lg: "80%",
+                xl: "70%",
+                "2xl": "60%",
               }}
               direction={{
                 base: "column",
@@ -146,7 +150,7 @@ function App() {
               gap={2}
               mx={"auto"}
               my={3}
-              px={3}
+              px={2}
             >
               <OrderSelector
                 selectedOption={gameQuery.ordering}
@@ -207,12 +211,8 @@ function App() {
           </GridItem>
         </Show>
         <GridItem area={"main"} px={5} overflowY="auto">
-          <GameGrid
-            gameQuery={gameQuery}
-            setPage = {onSetPage}
-          />
+          <GameGrid gameQuery={gameQuery} setPage={onSetPage} />
           <Pagination
-            
             hasNext={Boolean(page.hasNextPage)}
             hasPrev={Boolean(page.hasPrevPage)}
             pageNumber={pageNumber}

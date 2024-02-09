@@ -6,7 +6,8 @@ const useGenres = (requestConfig?: AxiosRequestConfig, deps?: any[]) => {
   const { data, httpErrors, isLoading } = useData<GenreData>(
     genreService,
     requestConfig,
-    deps || ["genres"]
+    deps || ["genres"],
+    1000*60*60*24*7
   );
 
   return {

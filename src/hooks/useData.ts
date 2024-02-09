@@ -10,9 +10,11 @@ interface ResponseData<T> {
 }
 
 const useData = <T>(
+  
   ServiceObject: HttpService,
   requestConfig?: AxiosRequestConfig,
-  deps?: any[]
+  deps?: any[],
+  cacheStaleTime?:number,
 ) => {
   const queryKey = deps || ["data"];
 
@@ -21,7 +23,7 @@ const useData = <T>(
 
     return resp.data;
   };
-  const staleTime = 1000 * 60 * 10; // The data will remain fresh until 10 mins
+  const staleTime = cacheStaleTime || 1000 * 60 * 10; // The data will remain fresh until 10 mins by default
   const gcTime = 1000 * 60 * 10;
   const placeholderData =  (prevData: ResponseData<T>) => prevData || []
 

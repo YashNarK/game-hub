@@ -1,6 +1,5 @@
-import platfromService, {
-  ParentPlatformData,
-} from "../services/platfrom-service";
+import { ParentPlatformData } from "../interfaces/platform.type";
+import platfromService from "../services/platfrom-service";
 import useData from "./useData";
 import { AxiosRequestConfig } from "axios";
 

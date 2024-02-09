@@ -1,6 +1,7 @@
 import { AxiosRequestConfig } from "axios";
-import gameService, { GameData } from "./../services/game-service";
+import gameService from "./../services/game-service";
 import useData from "./useData";
+import { GameData } from "../interfaces/game.type";
 
 const useGames = (requestConfig?: AxiosRequestConfig, deps?: any[]) => {
   const { data, httpErrors, isLoading, nextPage, prevPage } = useData<GameData>(

@@ -1,5 +1,6 @@
+import { GenreData } from "../interfaces/genre.type";
 import { AxiosRequestConfig } from "../services/api-client";
-import genreService, { GenreData } from "../services/genre-service";
+import genreService from "../services/genre-service";
 import useData from "./useData";
 
 const useGenres = (requestConfig?: AxiosRequestConfig, deps?: any[]) => {

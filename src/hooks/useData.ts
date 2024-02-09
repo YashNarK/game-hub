@@ -1,13 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError, AxiosRequestConfig } from "../services/api-client";
 import { HttpService } from "../services/http-service";
+import { ResponseData } from "../interfaces/response.type";
 
-export interface  ResponseData<T> {
-  count: number;
-  results: T[];
-  next: string | null;
-  previous: string | null;
-}
+
 
 const useData = <T>(
   

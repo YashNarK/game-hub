@@ -3,15 +3,15 @@ import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
-import { GenreData } from "./services/genre-service";
 import PlatformSelector from "./components/PlatformSelector";
-import { ParentPlatformData } from "./services/platfrom-service";
 import OrderSelector from "./components/OrderSelector";
 import Gameheading from "./components/GameHeading";
 import Footer from "./components/Footer";
 import useColorModes from "./hooks/useColorModes";
 import ClearButton from "./components/ClearButton";
 import Pagination from "./components/Pagination";
+import { GenreData } from "./interfaces/genre.type";
+import { ParentPlatformData } from "./interfaces/platform.type";
 
 export interface GameQuery {
   genre?: GenreData | null | undefined;

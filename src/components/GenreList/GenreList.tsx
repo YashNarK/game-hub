@@ -21,7 +21,7 @@ import useColorModes from "../../hooks/useColorModes";
 
 interface Props {
   onGenreSelect: (selectedGenre: GenreData | null) => void;
-  selectedGenre: GenreData | null;
+  selectedGenre: GenreData | null | undefined;
 }
 
 const GenreList = ({ onGenreSelect, selectedGenre }: Props) => {

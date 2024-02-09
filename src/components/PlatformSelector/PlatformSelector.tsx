@@ -12,7 +12,7 @@ import { ParentPlatformData } from "../../services/platfrom-service";
 
 interface Props {
   onPlatformSelect: (platform: ParentPlatformData | null) => void;
-  selectedPlatform: ParentPlatformData | null;
+  selectedPlatform: ParentPlatformData | null | undefined;
 }
 
 const PlatformSelector = ({ onPlatformSelect, selectedPlatform }: Props) => {

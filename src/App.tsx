@@ -11,8 +11,8 @@ import Gameheading from "./components/GameHeading";
 import Footer from "./components/Footer";
 
 export interface GameQuery {
-  genre: GenreData | null;
-  platform: ParentPlatformData | null;
+  genre?: GenreData | null | undefined;
+  platform?: ParentPlatformData | null | undefined;
   ordering: string | null;
   isAscending: boolean;
   search: string | undefined;

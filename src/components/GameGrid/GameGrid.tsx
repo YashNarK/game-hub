@@ -35,7 +35,7 @@ const GameGrid = ({ gameQuery, pageNumber, onNext, onPrev }: Props) => {
         page: gameQuery.page,
       },
     },
-    [{...gameQuery,platform:null,genre:null}]
+    [{...gameQuery,platform:undefined,genre:undefined}]
   );
 
   const { colorModeRegular } = useColorModes();

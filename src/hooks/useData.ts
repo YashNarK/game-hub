@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AxiosError, AxiosRequestConfig } from "../services/api-client";
 import { HttpService } from "../services/http-service";
 
-interface ResponseData<T> {
+export interface  ResponseData<T> {
   count: number;
   results: T[];
   next: string | null;
@@ -15,6 +15,7 @@ const useData = <T>(
   requestConfig?: AxiosRequestConfig,
   deps?: any[],
   cacheStaleTime?:number,
+  oldInitialData?:ResponseData<T> 
 ) => {
   const queryKey = deps || ["data"];
 
@@ -25,13 +26,13 @@ const useData = <T>(
   };
   const staleTime = cacheStaleTime || 1000 * 60 * 10; // The data will remain fresh until 10 mins by default
   const gcTime = 1000 * 60 * 10;
-  const placeholderData =  (prevData: ResponseData<T>) => prevData || []
 
   const { data, error, isLoading, isFetching } = useQuery<ResponseData<T>, AxiosError>({
     queryKey,
     queryFn,
     staleTime,
     gcTime,
+    initialData: oldInitialData
   });
 
   return {
@@ -40,7 +41,6 @@ const useData = <T>(
     isLoading: isLoading || isFetching,
     nextPage: data?.next,
     prevPage: data?.previous,
-    placeholderData
   };
 };
 

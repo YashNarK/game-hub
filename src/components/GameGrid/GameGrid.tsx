@@ -28,7 +28,7 @@ const GameGrid = ({ gameQuery }: Props) => {
     {
       params: {
         genres: gameQuery.genre?.slug,
-        paltforms: gameQuery.platform?.slug,
+        platforms: gameQuery.platform?.id,
         ordering: gameQuery.ordering,
         search: gameQuery.search,
       },

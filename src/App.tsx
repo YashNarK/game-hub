@@ -9,6 +9,7 @@ import { ParentPlatformData } from "./services/platfrom-service";
 import OrderSelector from "./components/OrderSelector";
 import Gameheading from "./components/GameHeading";
 import Footer from "./components/Footer";
+import useColorModes from "./hooks/useColorModes";
 
 export interface GameQuery {
   genre?: GenreData | null | undefined;
@@ -28,6 +29,8 @@ function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({
     page: pageNumber,
   } as GameQuery);
+
+  const { reverseColorModeRegular } = useColorModes();
 
   // Use Refs
 
@@ -100,7 +103,14 @@ function App() {
           "2xl": "250px 1fr",
         }}
       >
-        <GridItem area={"nav"}>
+        <GridItem
+          area={"nav"}
+          position={"sticky"}
+          top="0"
+          zIndex="100"
+          as={Box}
+          bg={reverseColorModeRegular}
+        >
           <NavBar onTyping={handleTyping} onSearch={handleSearch} />
 
           <Box>
@@ -109,16 +119,16 @@ function App() {
               justifyContent={"space-between"}
               w={{
                 base: "100%",
-                md: "50%",
+                md: "80%",
               }}
               direction={{
                 base: "column",
                 md: "row",
               }}
-              gap={10}
-              mx={'auto'}
-              my={5}
-              px={5}
+              gap={2}
+              mx={"auto"}
+              my={3}
+              px={3}
             >
               <OrderSelector
                 selectedOption={gameQuery.ordering}
@@ -141,35 +151,39 @@ function App() {
                   });
                 }}
               />
-              <PlatformSelector
-                selectedPlatform={gameQuery.platform}
-                onPlatformSelect={handlePlatformSelect}
-              />
-              <Button
-                isDisabled={
-                  (gameQuery.isAscending === undefined ||
-                    gameQuery.isAscending === false) &&
-                  (gameQuery.ordering === undefined ||
-                    gameQuery.ordering === null) &&
-                  (gameQuery.platform === undefined ||
-                    gameQuery.platform === null)
-                }
-                onClick={() => {
-                  setGameQuery({
-                    ...gameQuery,
-                    isAscending: false,
-                    ordering: null,
-                    platform: null,
-                    platformName: undefined,
-                    page: 1,
-                  });
-                  setPageNumber(1);
-                }}
-              >
-                Clear
-              </Button>
+              <Box>
+                <PlatformSelector
+                  selectedPlatform={gameQuery.platform}
+                  onPlatformSelect={handlePlatformSelect}
+                />
+                <Button
+                  variant={"ghost"}
+                  ms={2}
+                  isDisabled={
+                    (gameQuery.isAscending === undefined ||
+                      gameQuery.isAscending === false) &&
+                    (gameQuery.ordering === undefined ||
+                      gameQuery.ordering === null) &&
+                    (gameQuery.platform === undefined ||
+                      gameQuery.platform === null)
+                  }
+                  onClick={() => {
+                    setGameQuery({
+                      ...gameQuery,
+                      isAscending: false,
+                      ordering: null,
+                      platform: null,
+                      platformName: undefined,
+                      page: 1,
+                    });
+                    setPageNumber(1);
+                  }}
+                >
+                  Clear
+                </Button>
+              </Box>
             </Stack>
-            <Box m={4} textAlign={'center'}>
+            <Box m={4} textAlign={"center"}>
               <Gameheading gameQuery={gameQuery} />
             </Box>
           </Box>

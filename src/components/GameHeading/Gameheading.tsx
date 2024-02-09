@@ -13,8 +13,12 @@ const Gameheading = ({ gameQuery }: Props) => {
 
   return (
     <>
-      {console.log(gameQuery)}
-      <Heading as="h1">{heading}</Heading>
+      <Heading fontSize={{
+        base: '15px',
+        md:'30px',
+        lg:'35px',
+        xl:'45px'
+      }}>{heading}</Heading>
     </>
   );
 };

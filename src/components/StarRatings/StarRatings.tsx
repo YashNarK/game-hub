@@ -1,6 +1,5 @@
-import {  HStack, Text } from "@chakra-ui/react";
-import { IoIosStar } from "react-icons/io";
-import { IoIosStarHalf } from "react-icons/io";
+import { HStack, Text } from "@chakra-ui/react";
+import { IoIosStar, IoIosStarOutline, IoIosStarHalf } from "react-icons/io";
 
 interface Props {
   ratings: number;
@@ -10,9 +9,10 @@ const generateStars = (numberOfStars: number) => {
   const absoluteStars = Math.floor(numberOfStars);
   const stars = [];
   for (let index = 0; index < absoluteStars; index++) {
-    stars.push(<IoIosStar key={index}/>);
+    stars.push(<IoIosStar key={index} />);
   }
-  if (numberOfStars - absoluteStars > 0) stars.push(<IoIosStarHalf key={absoluteStars+1}/>);
+  if (numberOfStars - absoluteStars > 0)
+    stars.push(<IoIosStarHalf key={absoluteStars + 1} />);
 
   return <HStack>{stars}</HStack>;
 };
@@ -20,9 +20,9 @@ const generateStars = (numberOfStars: number) => {
 const StarRatings = ({ ratings }: Props) => {
   return (
     <>
-      <HStack justifyContent={'start'} spacing={2}>
-        <Text>{ratings}</Text>
-        {generateStars(ratings)}
+      <HStack justifyContent={"start"} spacing={2}>
+        <Text>{ratings ? ratings : "NA"}</Text>
+        {ratings ? generateStars(ratings) : <IoIosStarOutline />}
       </HStack>
     </>
   );

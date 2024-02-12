@@ -50,7 +50,6 @@ const GenreList = ({ onGenreSelect, selectedGenre }: Props) => {
 
   return (
     <>
-      {console.log(selectedGenre, hoveredGenre)}
 
       {httpErrors && (
         <>

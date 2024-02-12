@@ -50,7 +50,6 @@ const GameGrid = ({ gameQuery, setPage }: Props) => {
   const skeletons = Array.from({ length: 13 }, (_, i) => i + 1);
   return (
     <>
-      {console.log(games?.length)}
       {httpErrors && (
         <Alert status="error" variant={"solid"} mb={3}>
           <AlertIcon />

@@ -8,12 +8,11 @@ import {
 } from "react-icons/fa";
 import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo } from "react-icons/si";
-import { BsGlobe } from "react-icons/bs";
+import { BsFillPatchQuestionFill, BsGlobe } from "react-icons/bs";
 import { IconType } from "react-icons";
 import { Badge, HStack, Icon } from "@chakra-ui/react";
 import useColorModes from "../../hooks/useColorModes";
 import { PlatformData } from "../../interfaces/platform.type";
-import { FaQuestionCircle } from "react-icons/fa";
 
 interface Props {
   platforms: PlatformData[];
@@ -51,7 +50,7 @@ const PlatformIcons = ({ platforms }: Props) => {
             )}
           </>
         ) : (
-          <Icon color={colorModeLighter} key={-1} as={FaQuestionCircle} />
+          <Icon color={colorModeLighter} key={-1} as={BsFillPatchQuestionFill} />
         )}
       </HStack>
     </>

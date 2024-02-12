@@ -10,7 +10,7 @@ import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import { IconType } from "react-icons";
-import { HStack, Icon } from "@chakra-ui/react";
+import { Badge, HStack, Icon } from "@chakra-ui/react";
 import useColorModes from "../../hooks/useColorModes";
 import { PlatformData } from "../../interfaces/platform.type";
 import { FaQuestionCircle } from "react-icons/fa";
@@ -33,23 +33,25 @@ const iconMap: { [key: string]: IconType } = {
 
 const PlatformIcons = ({ platforms }: Props) => {
   const { colorModeLighter } = useColorModes();
+
   return (
     <>
       <HStack>
         {platforms ? (
-          platforms.map(({ platform }) => (
-            <Icon
-              color={colorModeLighter}
-              key={platform.id}
-              as={iconMap[platform.slug]}
-            />
-          ))
+          <>
+            {platforms.slice(0, 5).map(({ platform }) => (
+              <Icon
+                color={colorModeLighter}
+                key={platform.id}
+                as={iconMap[platform.slug]}
+              />
+            ))}
+            {platforms.slice(5).length != 0 && (
+              <Badge>+{platforms.slice(5).length}</Badge>
+            )}
+          </>
         ) : (
-          <Icon
-            color={colorModeLighter}
-            key={-1}
-            as={FaQuestionCircle}
-          />
+          <Icon color={colorModeLighter} key={-1} as={FaQuestionCircle} />
         )}
       </HStack>
     </>

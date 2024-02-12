@@ -197,12 +197,13 @@ function App() {
           <GridItem
             area={"aside"}
             px={3}
+            mb={"1cm"}
             position="sticky"
             left="0"
-            top="200"
-            height="70vh" // Adjust the height as needed
-            overflowY="auto" // Enable vertical scrolling for the GenreList
+            top="212"
             zIndex="99" // Ensure it's behind the NavBar
+            height="70vh"
+            overflowY={"auto"}
           >
             <GenreList
               selectedGenre={gameQuery.genre}

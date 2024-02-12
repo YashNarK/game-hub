@@ -70,7 +70,7 @@ const GenreList = ({ onGenreSelect, selectedGenre }: Props) => {
           <Heading fontSize={"2xl"} my={4}>
             Genre List
           </Heading>
-          <List spacing={2} maxH={"15cm"} overflow={"auto"}>
+          <List spacing={2} maxH={"15cm"}>
             <ListItem py={1}>
               <HStack spacing={2}>
                 <ListIcon as={GiVibratingBall} boxSize={"32px"} />{" "}

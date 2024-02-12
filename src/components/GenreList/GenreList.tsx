@@ -124,6 +124,7 @@ const GenreList = ({ onGenreSelect, selectedGenre }: Props) => {
                     fontSize={"lg"}
                     onMouseEnter={() => setHoveredGenre(genre.id)}
                     onMouseLeave={() => setHoveredGenre(-1)}
+                    textAlign={"start"}
                   >
                     {genre.name}
                   </Button>

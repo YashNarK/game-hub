@@ -34,6 +34,22 @@ function App() {
   // Use Effects
 
   // handler functions
+  const handleAscDescToggle = () => {
+    let newOrdering: string | null;
+    if (gameQuery.isAscending)
+      newOrdering = `-${gameQuery.ordering}`;
+    else {
+      newOrdering =
+        gameQuery.ordering?.slice(0, 1) === "-"
+          ? gameQuery.ordering?.slice(1)
+          : null;
+    }
+    setGameQuery({
+      ...gameQuery,
+      isAscending: !gameQuery.isAscending,
+      ordering: newOrdering,
+    });
+  }
   const onSetPage = (
     nextPage: string | null | undefined,
     prevPage: string | null | undefined
@@ -163,22 +179,7 @@ function App() {
                 selectedOption={gameQuery.ordering}
                 isAscending={gameQuery.isAscending}
                 onSortOptionSelection={handleSortSelect}
-                onAscDescToggle={() => {
-                  let newOrdering: string | null;
-                  if (gameQuery.isAscending)
-                    newOrdering = `-${gameQuery.ordering}`;
-                  else {
-                    newOrdering =
-                      gameQuery.ordering?.slice(0, 1) === "-"
-                        ? gameQuery.ordering?.slice(1)
-                        : null;
-                  }
-                  setGameQuery({
-                    ...gameQuery,
-                    isAscending: !gameQuery.isAscending,
-                    ordering: newOrdering,
-                  });
-                }}
+                onAscDescToggle={handleAscDescToggle}
               />
               <Box>
                 <PlatformSelector

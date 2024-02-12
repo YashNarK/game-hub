@@ -8,6 +8,8 @@ import {
   SimpleGrid,
   Spinner,
   VStack,
+  HStack,
+  Text,
 } from "@chakra-ui/react";
 import useGames from "../../hooks/useGames";
 import GameCard from "../GameCard";
@@ -16,6 +18,7 @@ import useColorModes from "../../hooks/useColorModes";
 import optimizeImage from "../../services/image-optimizer";
 import { useEffect } from "react";
 import { GameQuery } from "../../interfaces/game.type";
+import { FaFaceSadCry } from "react-icons/fa6";
 
 interface Props {
   gameQuery: GameQuery;
@@ -42,11 +45,12 @@ const GameGrid = ({ gameQuery, setPage }: Props) => {
   // Update page information when next/prev pages change
   useEffect(() => {
     setPage(nextPage, prevPage);
-  }, [nextPage,prevPage]);
+  }, [nextPage, prevPage]);
   const { colorModeRegular } = useColorModes();
   const skeletons = Array.from({ length: 13 }, (_, i) => i + 1);
   return (
     <>
+      {console.log(games?.length)}
       {httpErrors && (
         <Alert status="error" variant={"solid"} mb={3}>
           <AlertIcon />
@@ -83,7 +87,7 @@ const GameGrid = ({ gameQuery, setPage }: Props) => {
             ))}
           </SimpleGrid>
         </VStack>
-      ) : (
+      ) : games?.length != 0 ? (
         <SimpleGrid
           columns={{
             base: 1,
@@ -110,6 +114,13 @@ const GameGrid = ({ gameQuery, setPage }: Props) => {
             );
           })}
         </SimpleGrid>
+      ) : (
+        <HStack justifyContent={"center"}>
+          <FaFaceSadCry as={Text} fontSize="xx-large" />
+          <Text fontSize={{ base: "x-large", md: "xx-large" }}>
+            No games found...
+          </Text>
+        </HStack>
       )}
     </>
   );

@@ -200,7 +200,7 @@ function App() {
             position="sticky"
             left="0"
             top="200"
-            height="100vh" // Adjust the height as needed
+            height="70vh" // Adjust the height as needed
             overflowY="auto" // Enable vertical scrolling for the GenreList
             zIndex="99" // Ensure it's behind the NavBar
           >

@@ -92,10 +92,10 @@ const GenreList = ({ onGenreSelect, selectedGenre }: Props) => {
                   All
                 </Button>
               </HStack>
-
-              {(!hoveredGenre &&
+              {/*  0 and null are explicit values (id and object resp.) for 'All' genre object*/}
+              {(hoveredGenre === 0 &&
                 underLineGenre(highlightProps.color, highlightProps.height)) ||
-                (!selectedGenre && underLineGenre())}
+                (selectedGenre === null && underLineGenre())}
             </ListItem>
             {genres?.map((genre) => (
               <ListItem key={genre.id} py={1}>

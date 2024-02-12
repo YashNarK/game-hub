@@ -23,7 +23,7 @@ interface GameQueryStoreType {
   handleAscDescToggle: () => void;
 }
 
-create<GameQueryStoreType>((set) => ({
+const GameQueryStore = create<GameQueryStoreType>((set) => ({
   gameQuery: {} as GameQuery,
   pageNumber: 1,
   page: {
@@ -144,3 +144,5 @@ create<GameQueryStoreType>((set) => ({
       };
     }),
 }));
+
+export default GameQueryStore;

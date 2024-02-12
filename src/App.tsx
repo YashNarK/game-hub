@@ -78,11 +78,18 @@ function App() {
     setPageNumber(1);
   };
   const handleSortSelect = (selectedSortOption: string | null) => {
-    setGameQuery({
-      ...gameQuery,
-      ordering: selectedSortOption,
-      isAscending: true,
-    });
+    if (selectedSortOption)
+      setGameQuery({
+        ...gameQuery,
+        ordering: selectedSortOption,
+        isAscending: true,
+      });
+    else
+      setGameQuery({
+        ...gameQuery,
+        ordering: null,
+        isAscending: undefined,
+      });
   };
 
   const handleSearch = (searchString: string | undefined) => {
@@ -180,9 +187,9 @@ function App() {
                 />
                 <ClearButton
                   isDisabled={
-                    gameQuery.isAscending === undefined &&
-                    gameQuery.ordering === undefined &&
-                    gameQuery.platform === undefined
+                    Boolean(!gameQuery.isAscending) &&
+                    Boolean(!gameQuery.ordering) &&
+                    Boolean(!gameQuery.platform)
                   }
                   onClick={handleClear}
                 />

@@ -50,6 +50,8 @@ const GenreList = ({ onGenreSelect, selectedGenre }: Props) => {
 
   return (
     <>
+      {console.log(selectedGenre, hoveredGenre)}
+
       {httpErrors && (
         <>
           <Alert status="error">
@@ -92,10 +94,9 @@ const GenreList = ({ onGenreSelect, selectedGenre }: Props) => {
                   All
                 </Button>
               </HStack>
-              {/*  0 and null are explicit values (id and object resp.) for 'All' genre object*/}
-              {(hoveredGenre === 0 &&
+              {(!hoveredGenre &&
                 underLineGenre(highlightProps.color, highlightProps.height)) ||
-                (selectedGenre === null && underLineGenre())}
+                (!selectedGenre && underLineGenre())}
             </ListItem>
             {genres?.map((genre) => (
               <ListItem key={genre.id} py={1}>

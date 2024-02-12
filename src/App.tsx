@@ -212,6 +212,9 @@ function App() {
         </Show>
         <GridItem area={"main"} px={5} overflowY="auto">
           <GameGrid gameQuery={gameQuery} setPage={onSetPage} />
+        </GridItem>
+
+        <GridItem area="footer">
           <Pagination
             hasNext={Boolean(page.hasNextPage)}
             hasPrev={Boolean(page.hasPrevPage)}
@@ -219,9 +222,6 @@ function App() {
             onNext={handleNextPage}
             onPrev={handlePrevPage}
           />
-        </GridItem>
-
-        <GridItem area="footer">
           <Footer />
         </GridItem>
       </Grid>

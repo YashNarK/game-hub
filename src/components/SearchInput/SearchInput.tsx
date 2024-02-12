@@ -1,7 +1,8 @@
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useReducer, useRef } from "react";
 import { BsSearch, BsXCircleFill } from "react-icons/bs";
 import styles from "./SearchInput.module.css";
+import hasSearchInputReducer from "../../reducers/HasSearchInputReducer";
 
 interface Props {
   onSearch: (searchString: string | undefined) => void;
@@ -9,14 +10,14 @@ interface Props {
 }
 
 const SearchInput = ({ onTyping, onSearch }: Props) => {
-  const [hasInput, setHasInput] = useState(false);
-
+  // const [hasInput, setHasInput] = useState(false);
+  const [hasSearchInput, dispatchHasSearchInput] = useReducer(hasSearchInputReducer,false);
   const ref = useRef<HTMLInputElement>(null);
 
   const clearInput = () => {
     if (ref.current) {
       ref.current.value = "";
-      setHasInput(false);
+      dispatchHasSearchInput({type:'NO'});
       onTyping("");
     }
   };
@@ -30,7 +31,7 @@ const SearchInput = ({ onTyping, onSearch }: Props) => {
         }}
       >
         <InputGroup>
-          {hasInput ? (
+          {hasSearchInput ? (
             <InputLeftElement
               className={styles.closeIcon}
               children={<BsXCircleFill onClick={clearInput} />}
@@ -41,7 +42,7 @@ const SearchInput = ({ onTyping, onSearch }: Props) => {
           <Input
             onChange={(event) => {
               onTyping(event.target.value);
-              setHasInput(Boolean(event.target.value));
+              dispatchHasSearchInput({type:Boolean(event.target.value)?'YES':'NO'});
             }}
             ref={ref}
             maxW={"30cm"}

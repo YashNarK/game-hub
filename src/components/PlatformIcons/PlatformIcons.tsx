@@ -13,6 +13,7 @@ import { IconType } from "react-icons";
 import { HStack, Icon } from "@chakra-ui/react";
 import useColorModes from "../../hooks/useColorModes";
 import { PlatformData } from "../../interfaces/platform.type";
+import { FaQuestionCircle } from "react-icons/fa";
 
 interface Props {
   platforms: PlatformData[];
@@ -35,7 +36,7 @@ const PlatformIcons = ({ platforms }: Props) => {
   return (
     <>
       <HStack>
-        {
+        {platforms ? (
           platforms.map(({ platform }) => (
             <Icon
               color={colorModeLighter}
@@ -43,7 +44,13 @@ const PlatformIcons = ({ platforms }: Props) => {
               as={iconMap[platform.slug]}
             />
           ))
-        }
+        ) : (
+          <Icon
+            color={colorModeLighter}
+            key={-1}
+            as={FaQuestionCircle}
+          />
+        )}
       </HStack>
     </>
   );

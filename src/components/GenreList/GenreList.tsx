@@ -15,9 +15,9 @@ import {
 import useGenres from "../../hooks/useGenres";
 import optimizeImage from "../../services/image-optimizer";
 import { GiVibratingBall } from "react-icons/gi";
-import { GenreData } from "../../services/genre-service";
 import { useState } from "react";
 import useColorModes from "../../hooks/useColorModes";
+import { GenreData } from "../../interfaces/genre.type";
 
 interface Props {
   onGenreSelect: (selectedGenre: GenreData | null) => void;

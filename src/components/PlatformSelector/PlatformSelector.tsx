@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 import usePlatform from "../../hooks/usePlatform";
-import { ParentPlatformData } from "../../services/platfrom-service";
+import { ParentPlatformData } from "../../interfaces/platform.type";
 
 interface Props {
   onPlatformSelect: (platform: ParentPlatformData | null) => void;

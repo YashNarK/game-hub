@@ -6,7 +6,6 @@ import { create } from "zustand";
 
 interface GameQueryStoreType {
   gameQuery: GameQuery;
-  pageNumber: number;
   page: Page;
   onSetPage: (
     nextPage: string | null | undefined,
@@ -24,8 +23,7 @@ interface GameQueryStoreType {
 }
 
 const useGameQueryStore = create<GameQueryStoreType>((set) => ({
-  gameQuery: {} as GameQuery,
-  pageNumber: 1,
+  gameQuery: {page:1} as GameQuery,
   page: {
     hasNextPage: false,
     hasPrevPage: false,
@@ -51,7 +49,6 @@ const useGameQueryStore = create<GameQueryStoreType>((set) => ({
         platformName: undefined,
         page: 1,
       },
-      pageNumber: 1,
     })),
   handleGenreSelect: (selectedGenre: GenreData | null) =>
     set((store) => ({
@@ -61,7 +58,6 @@ const useGameQueryStore = create<GameQueryStoreType>((set) => ({
         genre: selectedGenre,
         page: 1,
       },
-      pageNumber: 1,
     })),
   handlePlatformSelect: (selectedPlatform: ParentPlatformData | null) =>
     set((store) => ({
@@ -71,7 +67,6 @@ const useGameQueryStore = create<GameQueryStoreType>((set) => ({
         platform: selectedPlatform,
         page: 1,
       },
-      pageNumber: 1,
     })),
   handleSortSelect: (selectedSortOption: string | null) =>
     set((store) => {
@@ -102,14 +97,12 @@ const useGameQueryStore = create<GameQueryStoreType>((set) => ({
         search: searchString,
         page: 1,
       },
-      pageNumber: 1,
     })),
   handleTyping: (searchString: string | undefined) =>
     set((store) => {
       if (!searchString) {
         return {
           gameQuery: { ...store.gameQuery, search: searchString, page: 1 },
-          pageNumber: 1,
         };
       }
       return store;
@@ -117,12 +110,10 @@ const useGameQueryStore = create<GameQueryStoreType>((set) => ({
   handleNextPage: () =>
     set((store) => ({
       gameQuery: { ...store.gameQuery, page: store.gameQuery.page + 1 },
-      pageNumber: store.pageNumber + 1,
     })),
   handlePrevPage: () =>
     set((store) => ({
       gameQuery: { ...store.gameQuery, page: store.gameQuery.page - 1 },
-      pageNumber: store.pageNumber - 1,
     })),
   handleAscDescToggle: () =>
     set((store) => {

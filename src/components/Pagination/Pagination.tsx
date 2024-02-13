@@ -7,7 +7,7 @@ const Pagination = () => {
     (s) => ({
       hasNext: Boolean(s.page.hasNextPage),
       hasPrev: Boolean(s.page.hasPrevPage),
-      pageNumber: s.pageNumber,
+      pageNumber: s.gameQuery.page,
       onNext: s.handleNextPage,
       onPrev: s.handlePrevPage,
     })

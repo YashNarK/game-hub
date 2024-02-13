@@ -17,18 +17,14 @@ import GameCardSkeleton from "../GameCardSkeleton";
 import useColorModes from "../../hooks/useColorModes";
 import optimizeImage from "../../services/image-optimizer";
 import { useEffect } from "react";
-import { GameQuery } from "../../interfaces/game.type";
 import { FaFaceSadCry } from "react-icons/fa6";
+import useGameQueryStore from "../../store";
 
-interface Props {
-  gameQuery: GameQuery;
-  setPage: (
-    nextPage: string | null | undefined,
-    prevPage: string | null | undefined
-  ) => void;
-}
-
-const GameGrid = ({ gameQuery, setPage }: Props) => {
+const GameGrid = () => {
+  const { gameQuery, setPage } = useGameQueryStore((s) => ({
+    gameQuery: s.gameQuery,
+    setPage: s.onSetPage,
+  }));
   const { games, isLoading, httpErrors, nextPage, prevPage } = useGames(
     {
       params: {

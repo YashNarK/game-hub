@@ -1,21 +1,18 @@
 import { Badge, Box, Button, ButtonGroup } from "@chakra-ui/react";
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
+import useGameQueryStore from "../../store";
 
-interface Props {
-  hasNext: boolean;
-  hasPrev: boolean;
-  pageNumber: number;
-  onNext: () => void;
-  onPrev: () => void;
-}
+const Pagination = () => {
+  const { hasNext, hasPrev, pageNumber, onNext, onPrev } = useGameQueryStore(
+    (s) => ({
+      hasNext: Boolean(s.page.hasNextPage),
+      hasPrev: Boolean(s.page.hasPrevPage),
+      pageNumber: s.pageNumber,
+      onNext: s.handleNextPage,
+      onPrev: s.handlePrevPage,
+    })
+  );
 
-const Pagination = ({
-  hasNext,
-  hasPrev,
-  pageNumber,
-  onNext,
-  onPrev,
-}: Props) => {
   return (
     <>
       <Box

@@ -10,20 +10,20 @@ import {
 } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 import { toCapitalize } from "../../services/utility";
+import useGameQueryStore from "../../store";
 
-interface Props {
-  onSortOptionSelection: (selectedOption: string | null) => void;
-  onAscDescToggle: () => void;
-  selectedOption: string | null | undefined;
-  isAscending: boolean | undefined;
-}
-
-const OrderSelector = ({
-  isAscending,
-  onAscDescToggle,
-  selectedOption,
-  onSortOptionSelection,
-}: Props) => {
+const OrderSelector = () => {
+  const {
+    selectedOption,
+    onSortOptionSelection,
+    onAscDescToggle,
+    isAscending,
+  } = useGameQueryStore((s) => ({
+    selectedOption: s.gameQuery.ordering,
+    onSortOptionSelection: s.handleSortSelect,
+    onAscDescToggle: s.handleAscDescToggle,
+    isAscending: s.gameQuery.isAscending,
+  }));
   const sortByOptions: string[] = [
     "name",
     "released",

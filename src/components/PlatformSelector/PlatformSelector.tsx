@@ -8,15 +8,15 @@ import {
 } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 import usePlatform from "../../hooks/usePlatform";
-import { ParentPlatformData } from "../../interfaces/platform.type";
+import useGameQueryStore from "../../store";
 
-interface Props {
-  onPlatformSelect: (platform: ParentPlatformData | null) => void;
-  selectedPlatform: ParentPlatformData | null | undefined;
-}
-
-const PlatformSelector = ({ onPlatformSelect, selectedPlatform }: Props) => {
+const PlatformSelector = () => {
   const { platforms } = usePlatform();
+
+  const { selectedPlatform, onPlatformSelect } = useGameQueryStore((s) => ({
+    selectedPlatform: s.gameQuery.platform,
+    onPlatformSelect: s.handlePlatformSelect,
+  }));
 
   return (
     <Menu isLazy>

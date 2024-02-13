@@ -3,22 +3,25 @@ import { useReducer, useRef } from "react";
 import { BsSearch, BsXCircleFill } from "react-icons/bs";
 import styles from "./SearchInput.module.css";
 import hasSearchInputReducer from "../../reducers/HasSearchInputReducer";
+import useGameQueryStore from "../../store";
 
-interface Props {
-  onSearch: (searchString: string | undefined) => void;
-  onTyping: (serachString: string | undefined) => void;
-}
+const SearchInput = () => {
+  const { handleTyping, handleSearch } = useGameQueryStore((s) => ({
+    handleTyping: s.handleTyping,
+    handleSearch: s.handleSearch,
+  }));
 
-const SearchInput = ({ onTyping, onSearch }: Props) => {
-  // const [hasInput, setHasInput] = useState(false);
-  const [hasSearchInput, dispatchHasSearchInput] = useReducer(hasSearchInputReducer,false);
+  const [hasSearchInput, dispatchHasSearchInput] = useReducer(
+    hasSearchInputReducer,
+    false
+  );
   const ref = useRef<HTMLInputElement>(null);
 
   const clearInput = () => {
     if (ref.current) {
       ref.current.value = "";
-      dispatchHasSearchInput({type:'NO'});
-      onTyping("");
+      dispatchHasSearchInput({ type: "NO" });
+      handleTyping("");
     }
   };
 
@@ -27,7 +30,7 @@ const SearchInput = ({ onTyping, onSearch }: Props) => {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          onSearch(ref.current?.value);
+          handleSearch(ref.current?.value);
         }}
       >
         <InputGroup>
@@ -41,8 +44,10 @@ const SearchInput = ({ onTyping, onSearch }: Props) => {
           )}
           <Input
             onChange={(event) => {
-              onTyping(event.target.value);
-              dispatchHasSearchInput({type:Boolean(event.target.value)?'YES':'NO'});
+              handleTyping(event.target.value);
+              dispatchHasSearchInput({
+                type: Boolean(event.target.value) ? "YES" : "NO",
+              });
             }}
             ref={ref}
             maxW={"30cm"}

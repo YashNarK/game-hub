@@ -1,24 +1,28 @@
 import { Heading } from "@chakra-ui/react";
 import { toCapitalize } from "../../services/utility";
-import { GameQuery } from "../../interfaces/game.type";
+import useGameQueryStore from "../../store";
 
-interface Props {
-  gameQuery: GameQuery;
-}
-
-const Gameheading = ({ gameQuery }: Props) => {
-  const heading = `${toCapitalize(gameQuery.platform?.slug) || ""} ${
-    toCapitalize(gameQuery.genre?.slug) || ""
+const Gameheading = () => {
+  const { platformName, genreName } = useGameQueryStore((s) => ({
+    platformName: s.gameQuery.platform?.slug,
+    genreName: s.gameQuery.genre?.slug,
+  }));
+  const heading = `${toCapitalize(platformName) || ""} ${
+    toCapitalize(genreName) || ""
   } Games`;
 
   return (
     <>
-      <Heading fontSize={{
-        base: '15px',
-        md:'30px',
-        lg:'35px',
-        xl:'45px'
-      }}>{heading}</Heading>
+      <Heading
+        fontSize={{
+          base: "15px",
+          md: "30px",
+          lg: "35px",
+          xl: "45px",
+        }}
+      >
+        {heading}
+      </Heading>
     </>
   );
 };

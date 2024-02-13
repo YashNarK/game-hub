@@ -17,14 +17,14 @@ import optimizeImage from "../../services/image-optimizer";
 import { GiVibratingBall } from "react-icons/gi";
 import { useState } from "react";
 import useColorModes from "../../hooks/useColorModes";
-import { GenreData } from "../../interfaces/genre.type";
+import useGameQueryStore from "../../store";
 
-interface Props {
-  onGenreSelect: (selectedGenre: GenreData | null) => void;
-  selectedGenre: GenreData | null | undefined;
-}
+const GenreList = () => {
+  const { selectedGenre, onGenreSelect } = useGameQueryStore((s) => ({
+    selectedGenre: s.gameQuery.genre,
+    onGenreSelect: s.handleGenreSelect,
+  }));
 
-const GenreList = ({ onGenreSelect, selectedGenre }: Props) => {
   const { genres, isLoading, httpErrors } = useGenres();
   const [hoveredGenre, setHoveredGenre] = useState<number>(-1);
   const { colorMode } = useColorMode();
@@ -50,7 +50,6 @@ const GenreList = ({ onGenreSelect, selectedGenre }: Props) => {
 
   return (
     <>
-
       {httpErrors && (
         <>
           <Alert status="error">

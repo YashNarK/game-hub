@@ -4,12 +4,9 @@ import logo from "../../assets/logo.jpg";
 import useColorModes from "../../hooks/useColorModes";
 import SearchInput from "../SearchInput";
 
-interface Props {
-  onSearch: (searchString: string | undefined) => void;
-  onTyping: (serachString: string | undefined) => void;
-}
 
-const NavBar = ({onTyping, onSearch}: Props) => {
+
+const NavBar = () => {
   const { colorModeRegular, reverseColorModeRegular } = useColorModes();
   const logoBorderColor = colorModeRegular;
   const logoBorderColorReverse = reverseColorModeRegular;
@@ -58,7 +55,7 @@ const NavBar = ({onTyping, onSearch}: Props) => {
             ></Image>
           </Circle>
         </Circle>
-        <SearchInput onTyping={onTyping} onSearch={onSearch} />
+        <SearchInput />
         <ToggleModeButton />
       </HStack>
     </div>

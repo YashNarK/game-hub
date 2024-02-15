@@ -1,14 +1,10 @@
-import { Box, Grid, GridItem, Show, Stack } from "@chakra-ui/react";
-import NavBar from "./components/NavBar";
+import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
+import Footer from "./components/Footer";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
-import PlatformSelector from "./components/PlatformSelector";
-import OrderSelector from "./components/OrderSelector";
-import Gameheading from "./components/GameHeading";
-import Footer from "./components/Footer";
-import useColorModes from "./hooks/useColorModes";
-import ClearButton from "./components/ClearButton";
+import NavBar from "./components/NavBar";
 import Pagination from "./components/Pagination";
+import useColorModes from "./hooks/useColorModes";
 
 function App() {
   const { reverseColorModeRegular } = useColorModes();
@@ -37,36 +33,7 @@ function App() {
         >
           <NavBar />
 
-          <Box>
-            <Stack
-              display={"flex"}
-              justifyContent={"space-between"}
-              w={{
-                base: "100%",
-                md: "95%",
-                lg: "80%",
-                xl: "70%",
-                "2xl": "60%",
-              }}
-              direction={{
-                base: "column",
-                md: "row",
-              }}
-              gap={2}
-              mx={"auto"}
-              my={3}
-              px={2}
-            >
-              <OrderSelector />
-              <Box>
-                <PlatformSelector />
-                <ClearButton />
-              </Box>
-            </Stack>
-            <Box m={4} textAlign={"center"}>
-              <Gameheading />
-            </Box>
-          </Box>
+          
         </GridItem>
         <Show above="md">
           <GridItem

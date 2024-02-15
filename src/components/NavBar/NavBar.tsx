@@ -1,19 +1,11 @@
-import { Circle, HStack, Image } from "@chakra-ui/react";
-import ToggleModeButton from "../ToggleModeButton";
-import logo from "../../assets/logo.jpg";
-import useColorModes from "../../hooks/useColorModes";
+import { HStack } from "@chakra-ui/react";
+import Logo from "../Logo";
 import SearchInput from "../SearchInput";
-
-
+import ToggleModeButton from "../ToggleModeButton";
 
 const NavBar = () => {
-  const { colorModeRegular, reverseColorModeRegular } = useColorModes();
-  const logoBorderColor = colorModeRegular;
-  const logoBorderColorReverse = reverseColorModeRegular;
-
-
   return (
-    <div >
+    <div>
       <HStack
         justifyContent={"space-between"}
         px={{
@@ -29,32 +21,7 @@ const NavBar = () => {
           "2xl": 40,
         }}
       >
-        <Circle
-          size={{
-            base: "40px",
-            md: "60px",
-          }}
-          bg="tomato"
-          bgColor={logoBorderColor}
-        >
-          <Circle
-            size={{
-              base: "35px",
-              md: "55px",
-            }}
-            bg="tomato"
-            bgColor={logoBorderColorReverse}
-          >
-            <Image
-              src={logo}
-              borderRadius={"30px"}
-              boxSize={{
-                base: "30px",
-                md: "50px",
-              }}
-            ></Image>
-          </Circle>
-        </Circle>
+        <Logo />
         <SearchInput />
         <ToggleModeButton />
       </HStack>

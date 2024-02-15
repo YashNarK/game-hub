@@ -3,6 +3,7 @@ import apiClient from "./api-client";
 
 interface Entity {
   id: number;
+  slug?: string;
 }
 
 class HttpService {
@@ -39,6 +40,11 @@ class HttpService {
 
   async getByID<T extends Entity>(entity: T) {
     const resp = await apiClient.get<T>(this.endpoint + "/" + entity.id);
+    return resp;
+  }
+
+  async getBySlug<T extends Entity>(entity: T) {
+    const resp = await apiClient.get<T>(this.endpoint + "/" + entity.slug);
     return resp;
   }
 }

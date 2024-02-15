@@ -15,8 +15,7 @@ const Gameheading = () => {
     <>
       <Heading
         fontSize={{
-          base: "15px",
-          md: "30px",
+          base: "30px",
           lg: "35px",
           xl: "45px",
         }}

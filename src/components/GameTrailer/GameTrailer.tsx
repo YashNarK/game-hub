@@ -13,7 +13,12 @@ const GameTrailer = ({ gameId }: Props) => {
       </Box>
     );
 
-  if (error) throw error;
+  if (error)
+    return (
+      <Heading as={"h3"}>
+        Error while loading Trailer: {error.message}
+      </Heading>
+    );
 
   const first = Trailer?.results[0];
   return first ? (

@@ -4,6 +4,7 @@ import { BsSearch, BsXCircleFill } from "react-icons/bs";
 import styles from "./SearchInput.module.css";
 import hasSearchInputReducer from "../../reducers/HasSearchInputReducer";
 import useGameQueryStore from "../../store";
+import { useNavigate } from "react-router-dom";
 
 const SearchInput = () => {
   const { handleTyping, handleSearch } = useGameQueryStore((s) => ({
@@ -16,6 +17,8 @@ const SearchInput = () => {
     false
   );
   const ref = useRef<HTMLInputElement>(null);
+
+  const navigate = useNavigate();
 
   const clearInput = () => {
     if (ref.current) {
@@ -31,6 +34,7 @@ const SearchInput = () => {
         onSubmit={(event) => {
           event.preventDefault();
           handleSearch(ref.current?.value);
+          navigate("/");
         }}
       >
         <InputGroup>

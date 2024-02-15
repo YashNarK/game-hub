@@ -57,8 +57,8 @@ const GameDetailsPage = () => {
         bottom={0}
         left={0}
         colorScheme={"teal"}
-        size={"sm"}
-        borderRadius={{ base: "50%", md: 3 }}
+        size={{ base: "md", md: "sm" }}
+        borderRadius={{ base: "75%", md: 3 }}
       >
         <RiArrowGoBackFill /> <Show above="md">Back to Home</Show>
       </Button>

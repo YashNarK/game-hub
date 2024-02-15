@@ -12,10 +12,11 @@ class HttpService {
     this.endpoint = endpoint;
   }
 
-  async get<T>( requestConfig?:AxiosRequestConfig) {
+  async get<T>(requestConfig?: AxiosRequestConfig) {
     const controller = new AbortController();
     const resp = await apiClient.get<T>(this.endpoint, {
-      signal: controller.signal,...requestConfig
+      signal: controller.signal,
+      ...requestConfig,
     });
     return {
       resp,
@@ -25,10 +26,11 @@ class HttpService {
     };
   }
 
-  async getAll<T>(requestConfig?:AxiosRequestConfig) {
+  async getAll<T>(requestConfig?: AxiosRequestConfig) {
     const controller = new AbortController();
     const resp = await apiClient.get<T[]>(this.endpoint, {
-      signal: controller.signal,...requestConfig
+      signal: controller.signal,
+      ...requestConfig,
     });
     return {
       resp,
@@ -38,13 +40,18 @@ class HttpService {
     };
   }
 
-  async getByID<T extends Entity>(id:number) {
+  async getByID<T extends Entity>(id: number) {
     const resp = await apiClient.get<T>(this.endpoint + "/" + id);
     return resp;
   }
 
-  async getBySlug<T extends Entity>(slug:string) {
+  async getBySlug<T extends Entity>(slug: string) {
     const resp = await apiClient.get<T>(this.endpoint + "/" + slug);
+    return resp;
+  }
+
+  async getDataByID<T extends Entity>(id: number, dataPath: string) {
+    const resp = await apiClient.get<T>(this.endpoint + "/" + id + dataPath);
     return resp;
   }
 }

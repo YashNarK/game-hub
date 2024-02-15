@@ -9,6 +9,7 @@ const useColorModes = () => {
   const colorModeDarker = useColorModeValue("black", "white");
   const reverseColorModeDarker = useColorModeValue("white", "black");
   const highlightColor = useColorModeValue("blue.600", "yellow");
+  const highlightColorText = useColorModeValue("white", "black");
   return {
     colorModeRegular,
     reverseColorModeRegular,
@@ -17,6 +18,7 @@ const useColorModes = () => {
     colorModeLighter,
     reverseColorModeLighter,
     highlightColor,
+    highlightColorText,
   };
 };
 

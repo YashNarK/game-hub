@@ -1,12 +1,51 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Show, Stack } from "@chakra-ui/react";
 import Footer from "../components/Footer";
 import GameGrid from "../components/GameGrid";
 import GenreList from "../components/GenreList";
 import Pagination from "../components/Pagination";
+import ClearButton from "../components/ClearButton";
+import Gameheading from "../components/GameHeading";
+import OrderSelector from "../components/OrderSelector";
+import PlatformSelector from "../components/PlatformSelector";
 
 const HomePage = () => {
   return (
     <>
+      {" "}
+      <Box>
+        <Stack
+          display={"flex"}
+          justifyContent={"space-between"}
+          w={{
+            base: "100%",
+            md: "95%",
+            lg: "80%",
+            xl: "70%",
+            "2xl": "60%",
+          }}
+          direction={{
+            base: "column",
+            md: "row",
+          }}
+          gap={2}
+          mx={"auto"}
+          my={3}
+          px={2}
+        >
+          <OrderSelector />
+          <Box
+            display={"flex"}
+            justifyContent={"space-between"}
+            flexWrap={"wrap"}
+          >
+            <PlatformSelector />
+            <ClearButton />
+          </Box>
+        </Stack>
+        <Box m={4} textAlign={"center"}>
+          <Gameheading />
+        </Box>
+      </Box>
       <Grid
         templateAreas={{
           base: ` "main main" "footer footer"`,

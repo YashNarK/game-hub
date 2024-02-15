@@ -45,7 +45,7 @@ const GameGrid = () => {
   const { colorModeRegular } = useColorModes();
   const skeletons = Array.from({ length: 13 }, (_, i) => i + 1);
   return (
-    <>
+    <Box py={5}>
       {httpErrors && (
         <Alert status="error" variant={"solid"} mb={3}>
           <AlertIcon />
@@ -101,9 +101,9 @@ const GameGrid = () => {
                   altText="Game Background image"
                   heading={game.name}
                   ratings={game.rating}
-                  gameUrl={game.website}
                   parent_platforms={game.parent_platforms}
                   criticScore={game.metacritic}
+                  slug={game.slug}
                 />
               </GridItem>
             );
@@ -117,7 +117,7 @@ const GameGrid = () => {
           </Text>
         </HStack>
       )}
-    </>
+    </Box>
   );
 };
 

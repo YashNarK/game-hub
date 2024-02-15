@@ -3,15 +3,17 @@ import StarRatings from "../StarRatings";
 import PlatformIcons from "../PlatformIcons";
 import MetaCriticBadge from "../MetaCriticBadge";
 import { PlatformData } from "../../interfaces/platform.type";
+import { Link } from "react-router-dom";
+import useColorModes from "../../hooks/useColorModes";
 
 interface Props {
   imageUrl: string;
   altText: string;
   heading: string;
   ratings: number;
-  gameUrl: string;
   parent_platforms: PlatformData[];
   criticScore: number;
+  slug: string;
 }
 
 const GameCard = ({
@@ -19,55 +21,50 @@ const GameCard = ({
   altText,
   heading,
   ratings,
-  gameUrl,
   parent_platforms,
   criticScore,
+  slug,
 }: Props) => {
-  return (
-    <>
-      <Card
-        as={"a"}
-        href={gameUrl}
-        target="_blank"
-        // w={{
-        //   base: "300px",
-        //   md: "230px",
-        //   lg: "250px",
-        //   xl: "280px",
-        //   "2xl": "300px",
-        // }}
-        boxShadow={"2xl"}
-        h={{
-          base: "440px",
-          md: "380px",
-        }}
-        overflow={"hidden"}
-      >
-        <CardBody>
-          <Image
-            src={imageUrl}
-            alt={altText}
-            borderRadius={"lg"}
-            h={{
-              base: "250px",
-              md: "200px",
-            }}
-            w={"100%"}
-          />
-          <Stack mt="6" spacing="3">
-            <Flex justifyContent={"space-between"}>
-              <PlatformIcons platforms={parent_platforms} />
-              <MetaCriticBadge criticScore={criticScore} />
-            </Flex>
+  const { highlightColor } = useColorModes();
 
-            <StarRatings ratings={ratings} />
-            <Heading noOfLines={2} size={"md"}>
-              {heading}
-            </Heading>
-          </Stack>
-        </CardBody>
-      </Card>
-    </>
+  return (
+    <Card
+      _hover={{
+        transform: "scale(1.03)",
+        color: highlightColor,
+        transition: "transform  .1s ease-in",
+      }}
+      boxShadow={"2xl"}
+      h={{
+        base: "440px",
+        md: "380px",
+      }}
+      overflow={"hidden"}
+    >
+      <CardBody>
+        <Image
+          src={imageUrl}
+          alt={altText}
+          borderRadius={"lg"}
+          h={{
+            base: "250px",
+            md: "200px",
+          }}
+          w={"100%"}
+        />
+        <Stack mt="6" spacing="3">
+          <Flex justifyContent={"space-between"}>
+            <PlatformIcons platforms={parent_platforms} />
+            <MetaCriticBadge criticScore={criticScore} />
+          </Flex>
+
+          <StarRatings ratings={ratings} />
+          <Heading noOfLines={2} size={"md"}>
+            <Link to={"games/" + slug}>{heading}</Link>
+          </Heading>
+        </Stack>
+      </CardBody>
+    </Card>
   );
 };
 

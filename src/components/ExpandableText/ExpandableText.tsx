@@ -4,17 +4,18 @@ import useColorModes from "../../hooks/useColorModes";
 import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
 
 interface Props {
-  numberOfLines: number;
   children: string;
 }
 
-const ExpandableText = ({ children, numberOfLines }: Props) => {
+const ExpandableText = ({ children }: Props) => {
   const { highlightColor } = useColorModes();
   const [isMaxLine, setIsMaxLine] = useState(true);
+
+  const finalText = isMaxLine ? children.substring(0, 650) + "..." : children;
   return (
     <>
-      <Text noOfLines={isMaxLine ? numberOfLines : -1}>{children}</Text>
-      <Box textAlign={"center"} my={3}>
+      <Text>{finalText}</Text>
+      {children.length>650 && <Box textAlign={"center"} my={3}>
         {" "}
         <Button
           variant={"outline"}
@@ -34,7 +35,7 @@ const ExpandableText = ({ children, numberOfLines }: Props) => {
             </>
           )}
         </Button>
-      </Box>
+      </Box>}
     </>
   );
 };

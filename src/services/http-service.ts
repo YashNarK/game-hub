@@ -38,13 +38,13 @@ class HttpService {
     };
   }
 
-  async getByID<T extends Entity>(entity: T) {
-    const resp = await apiClient.get<T>(this.endpoint + "/" + entity.id);
+  async getByID<T extends Entity>(id:number) {
+    const resp = await apiClient.get<T>(this.endpoint + "/" + id);
     return resp;
   }
 
-  async getBySlug<T extends Entity>(entity: T) {
-    const resp = await apiClient.get<T>(this.endpoint + "/" + entity.slug);
+  async getBySlug<T extends Entity>(slug:string) {
+    const resp = await apiClient.get<T>(this.endpoint + "/" + slug);
     return resp;
   }
 }

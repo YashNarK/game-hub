@@ -83,7 +83,7 @@ const useGameQueryStore = create<GameQueryStoreType>((set) => ({
           return {
             gameQuery: {
               ...store.gameQuery,
-              ordering: null,
+              ordering: undefined,
               isAscending: undefined,
             },
           };

@@ -1,5 +1,6 @@
 import { GenreData } from "./genre.type";
 import { ParentPlatformData, PlatformData } from "./platform.type";
+import Publisher from "./publisher.type";
 
 export interface GameData {
   id: number;
@@ -13,6 +14,7 @@ export interface GameData {
   metacritic: number;
   genres: GenreData[];
   slug: string;
+  publishers: Publisher[];
 }
 
 export interface GameQuery {

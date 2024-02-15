@@ -18,9 +18,10 @@ const ExpandableText = ({ children, numberOfLines }: Props) => {
           onClick={() => {
             setIsMaxLine(!isMaxLine);
           }}
-          colorScheme="green"
+          colorScheme="yellow"
+          fontSize={"bolder"}
         >
-          {isMaxLine ? "Load More..." : "Show Less..."}
+          {isMaxLine ? "Read More..." : "Show Less..."}
         </Button>
       </Box>
     </>

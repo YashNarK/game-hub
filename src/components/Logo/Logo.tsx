@@ -1,6 +1,7 @@
 import { Circle, Image } from "@chakra-ui/react";
 import logo from "../../assets/logo.jpg";
 import useColorModes from "../../hooks/useColorModes";
+import { Link } from "react-router-dom";
 
 
 const Logo = () => {
@@ -8,7 +9,7 @@ const Logo = () => {
   const logoBorderColor = colorModeRegular;
   const logoBorderColorReverse = reverseColorModeRegular;
   return (
-    <Circle
+    <Circle as={Link} to={"/"}
       size={{
         base: "40px",
         md: "60px",

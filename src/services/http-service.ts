@@ -50,7 +50,7 @@ class HttpService {
     return resp;
   }
 
-  async getDataByID<T extends Entity>(id: number, dataPath: string) {
+  async getDataByID<T>(id: number, dataPath: string) {
     const resp = await apiClient.get<T>(this.endpoint + "/" + id + dataPath);
     return resp;
   }

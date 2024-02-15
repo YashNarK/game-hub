@@ -1,9 +1,11 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useGameDetails from "../hooks/useGameDetails";
 import {
   Box,
+  Button,
   GridItem,
   Heading,
+  Show,
   SimpleGrid,
   Spinner,
   Text,
@@ -12,6 +14,7 @@ import ExpandableText from "../components/ExpandableText";
 import GameAttributes from "../components/GameAttributes";
 import GameTrailer from "../components/GameTrailer";
 import GameScreenshots from "../components/GameScreenshots";
+import { RiArrowGoBackFill } from "react-icons/ri";
 
 const GameDetailsPage = () => {
   const { slug } = useParams();
@@ -46,6 +49,19 @@ const GameDetailsPage = () => {
           <GameScreenshots gameId={game.id} />
         </GridItem>
       </SimpleGrid>
+      <Button
+        as={Link}
+        to={"/"}
+        variant={"solid"}
+        position={"sticky"}
+        bottom={0}
+        left={0}
+        colorScheme={"teal"}
+        size={"sm"}
+        borderRadius={{ base: "50%", md: 3 }}
+      >
+        <RiArrowGoBackFill /> <Show above="md">Back to Home</Show>
+      </Button>
     </Box>
   );
 };

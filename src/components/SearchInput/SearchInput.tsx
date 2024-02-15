@@ -34,7 +34,7 @@ const SearchInput = () => {
         onSubmit={(event) => {
           event.preventDefault();
           handleSearch(ref.current?.value);
-          navigate("/");
+          navigate("/game-hub");
         }}
       >
         <InputGroup>

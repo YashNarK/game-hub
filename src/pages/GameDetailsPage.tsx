@@ -51,7 +51,7 @@ const GameDetailsPage = () => {
       </SimpleGrid>
       <Button
         as={Link}
-        to={"/"}
+        to={"/game-hub"}
         variant={"solid"}
         position={"sticky"}
         bottom={0}

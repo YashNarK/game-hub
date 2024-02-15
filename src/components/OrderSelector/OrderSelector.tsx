@@ -36,7 +36,7 @@ const OrderSelector = () => {
 
   return (
     <>
-      <HStack>
+      <HStack zIndex={99}>
         <Menu isLazy>
           <MenuButton as={Button} rightIcon={<FaChevronDown />}>
             Order by:{" "}

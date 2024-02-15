@@ -66,7 +66,7 @@ const HomePage = () => {
             position="sticky"
             left="0"
             top="212"
-            zIndex="99" // Ensure it's behind the NavBar
+            zIndex="98" // Ensure it's behind the NavBar
             height="70vh"
             overflowY={"auto"}
           >

@@ -9,7 +9,7 @@ const Logo = () => {
   const logoBorderColor = colorModeRegular;
   const logoBorderColorReverse = reverseColorModeRegular;
   return (
-    <Circle as={Link} to={"/"}
+    <Circle as={Link} to={"/game-hub"}
       size={{
         base: "40px",
         md: "60px",

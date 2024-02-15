@@ -1,20 +1,16 @@
-import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
-import Footer from "./components/Footer";
-import GameGrid from "./components/GameGrid";
-import GenreList from "./components/GenreList";
-import NavBar from "./components/NavBar";
-import Pagination from "./components/Pagination";
-import useColorModes from "./hooks/useColorModes";
+import { Grid, GridItem, Show } from "@chakra-ui/react";
+import Footer from "../components/Footer";
+import GameGrid from "../components/GameGrid";
+import GenreList from "../components/GenreList";
+import Pagination from "../components/Pagination";
 
-function App() {
-  const { reverseColorModeRegular } = useColorModes();
-
+const HomePage = () => {
   return (
     <>
       <Grid
         templateAreas={{
-          base: `"nav nav" "main main" "footer footer"`,
-          md: `"nav nav" "aside main" "footer footer"`,
+          base: ` "main main" "footer footer"`,
+          md: ` "aside main" "footer footer"`,
         }}
         gridTemplateColumns={{
           base: "180px 1fr",
@@ -23,18 +19,6 @@ function App() {
           "2xl": "250px 1fr",
         }}
       >
-        <GridItem
-          area={"nav"}
-          position={"sticky"}
-          top="0"
-          zIndex="100"
-          as={Box}
-          bg={reverseColorModeRegular}
-        >
-          <NavBar />
-
-          
-        </GridItem>
         <Show above="md">
           <GridItem
             area={"aside"}
@@ -61,5 +45,6 @@ function App() {
       </Grid>
     </>
   );
-}
-export default App;
+};
+
+export default HomePage;

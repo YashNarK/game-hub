@@ -1,5 +1,7 @@
 import { Box, Button, Text } from "@chakra-ui/react";
 import { useState } from "react";
+import useColorModes from "../../hooks/useColorModes";
+import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
 
 interface Props {
   numberOfLines: number;
@@ -7,6 +9,7 @@ interface Props {
 }
 
 const ExpandableText = ({ children, numberOfLines }: Props) => {
+  const { highlightColor } = useColorModes();
   const [isMaxLine, setIsMaxLine] = useState(true);
   return (
     <>
@@ -14,14 +17,22 @@ const ExpandableText = ({ children, numberOfLines }: Props) => {
       <Box textAlign={"center"} my={3}>
         {" "}
         <Button
-          variant={"ghost"}
+          variant={"outline"}
           onClick={() => {
             setIsMaxLine(!isMaxLine);
           }}
-          colorScheme="yellow"
+          colorScheme={highlightColor}
           fontSize={"bolder"}
         >
-          {isMaxLine ? "Read More..." : "Show Less..."}
+          {isMaxLine ? (
+            <>
+              <FaAngleDoubleDown /> Read More...
+            </>
+          ) : (
+            <>
+              <FaAngleDoubleUp /> Show Less...
+            </>
+          )}
         </Button>
       </Box>
     </>

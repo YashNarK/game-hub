@@ -18,4 +18,4 @@
 
 # Website
 
-Website Link: https://yashnark.io/game-hub
+Website Link: https://yashnark.github.io/game-hub
